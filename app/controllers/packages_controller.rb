@@ -5,12 +5,14 @@ class PackagesController < ApplicationController
   def index
     @packages = Package.all
 
-    render json: @packages
+    render json: @packages, include: [:sender, :receiver]
   end
 
   # GET /packages/1
   def show
-    render json: @package
+    render json: @package, 
+      include: [:sender, :receiver],
+      except: [:created_at, :updated_at]
   end
 
   # POST /packages
@@ -18,24 +20,32 @@ class PackagesController < ApplicationController
     @package = Package.new(package_params)
 
     if @package.save
-      render json: @package, status: :created, location: @package
+      render json: @package, 
+        include: [:sender, :receiver],
+        status: :created, 
+        location: @package
     else
-      render json: @package.errors, status: :unprocessable_entity
+      render json: @package.errors, 
+        status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /packages/1
   def update
     if @package.update(package_params)
-      render json: @package
+      render json: @package, 
+        include: [:sender, :receiver],
+        except: [:created_at, :updated_at]
     else
-      render json: @package.errors, status: :unprocessable_entity
+      render json: @package.errors, 
+        status: :unprocessable_entity
     end
   end
 
   # DELETE /packages/1
   def destroy
     @package.destroy
+    render json: {message: 'package deleted'}, status: 200
   end
 
   private
