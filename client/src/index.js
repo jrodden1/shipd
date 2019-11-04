@@ -4,14 +4,20 @@ import './index.css'; //not sure I need this line
 import App from './App';
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers/index.js'
 
+//A helpful link on making Thunk and Redux Dev Tools work:
+//https://medium.com/@e_himmelfarb/implement-redux-devtools-extension-with-thunk-and-other-async-middleware-20e97100b2b0
 const store = createStore(
    rootReducer,
-   applyMiddleware(thunk)
+   compose(
+      applyMiddleware(thunk),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   )
 )
+
 
 ReactDOM.render(
    <Provider store={store}>
