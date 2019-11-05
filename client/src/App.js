@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from 'react'
-//import shipdLogo from './shipd.svg'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,8 +9,9 @@ import NavBar from './containers/NavbarContainer'
 import ReportsContainer from './containers/ReportsContainer'
 
 class App extends Component {
-  
+
   render() {
+    console.log("App Props", this.props)
     return (
       <Router>
         <div>

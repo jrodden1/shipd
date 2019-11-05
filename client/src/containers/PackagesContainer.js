@@ -5,18 +5,27 @@ import Packages from '../components/package/Packages'
 
 class PackagesContainer extends Component {
    render() {
+      console.log("Packages Container Props", this.props)
       return (
          <div>
-            <Route exact path={this.props.match.url} render={() => <h3>welcome to packages Container</h3>}/>
+            <Route exact path={this.props.match.url} render={() => {
+               return (
+                  <React.Fragment>
+                     <h3>welcome to Packages Container</h3>
+                     <Packages packages={this.props.packages} />
+                  </React.Fragment>
+               )
+            }}/>
             <Route path={`${this.props.match.url}/:packageId`} render={routerProps => <Packages {...routerProps} packages={this.props.packages} />} />         
          </div>
       )
    }
 }
 
-const mapStateToProps = storeState => {
+const mapStateToProps = store => {
+   console.log("StoreState", store)
    return {
-      packages: storeState.packages
+      packages: store.packagesReducer.packages
    }
 }
 
