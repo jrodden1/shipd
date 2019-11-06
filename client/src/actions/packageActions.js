@@ -7,12 +7,10 @@ export const fetchPackages = () => {
    }
 }
 export const createPackage = (newPackageObj) => {
-   
-   debugger
+
    const dataObject = {
       package: {
-         //rest of my params here
-         //weight: newPackageObj.weight // could also do some deconstruction above this and make this simpler
+         ...newPackageObj
       }
    }
 

@@ -3,9 +3,11 @@ import React from 'react';
 const Package = ({ pkg }) => {
    return (
       <div>
-         {pkg.id}<br/>
-         {pkg.service}<br/>
-         {pkg.service_provider}
+         Package No: {pkg.id}<br/>
+         Service Provider: {pkg.service_provider} <br/>
+         Package Service: {pkg.service}<br/>
+         Weight: {pkg.weight}
+         {/* need to display sender and receiver info here to */}
       </div>
    );
 }

@@ -15,7 +15,8 @@ export default class PackageForm extends Component {
             street2: "",
             city: "",
             state: "",
-            zip: ""
+            zip: "",
+            phone: ""
          },
          receiver: {
             firstname: "",
@@ -25,7 +26,8 @@ export default class PackageForm extends Component {
             street2: "",
             city: "",
             state: "",
-            zip: ""
+            zip: "",
+            phone: ""
          },
          serviceProviders: this.props.serviceProviders, //this will be an object with providers as keys, and services as an array for that key
          serviceProviderSelected: initialProviderSelected,
@@ -34,26 +36,27 @@ export default class PackageForm extends Component {
          weight: "",
          cost: "",
          trackingNum: "",
-         note: ""
-         //REFACTOR / Post MVP - make serviceProviders prop; array of service providers and their associated service options.  Then create option values iteratively based on this array
+         note: "",
+         phone: ""
       }
    }
    
    handleSubmit = event => {
       event.preventDefault()
-      debugger
+      
       const newPackage = {
          service_provider: this.state.serviceProviderSelected,
          service: this.state.serviceOptionSelected,
          weight: this.state.weight,
-         sender: {
-            street1: this.state.sender.street1
+         cost: this.state.cost,
+         note: this.state.note,
+         tracking_num: this.state.trackingNum,
+         sender_attributes: {
+            ...this.state.sender
          },
-         receiver: {
-            street1: this.state.receiver.street1
-         },
-         note: this.state.note
-
+         receiver_attributes: {
+            ...this.state.receiver
+         }
       }
       // use a callback here to send the state to the container like:
       this.props.createPackage(newPackage)
@@ -83,7 +86,7 @@ export default class PackageForm extends Component {
       const serviceProviderNames = Object.keys(this.state.serviceProviders)
       return (
          <select value={this.state.serviceProviderSelected} onChange={this.handleSPChange}>
-            {serviceProviderNames.map(provider => <option value={provider}>{provider}</option>)}
+            {serviceProviderNames.map((provider, i) => <option key={i} value={provider}>{provider}</option>)}
          </select>
       )
    }
@@ -91,7 +94,7 @@ export default class PackageForm extends Component {
    renderServiceOptions = () => {
       return (
          <select value={this.state.serviceOptionSelected} onChange={this.handleSOChange}>
-            {this.state.serviceProviderOptions.map(pOption => <option value={pOption}>{pOption}</option>)}
+            {this.state.serviceProviderOptions.map((pOption, i) => <option key={i} value={pOption}>{pOption}</option>)}
          </select>
       )
    }
@@ -158,6 +161,7 @@ export default class PackageForm extends Component {
                {/*should probably REFACTOR state to be a select dropdown*/}
                State: <input type="text" data-addr-kind="sender" name="state" id="sender_state" onChange={this.handleSRChange} value={this.state.sender.state} />
                Zipcode: <input type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} /><br/>
+               Phone: <input type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />*Required<br/>
             </p>
             <p><strong>Receiver:</strong><br/>
                Firstname: <input type="text" data-addr-kind="reciever" name="firstname" id="receiver_firstname" onChange={this.handleSRChange} value={this.state.receiver.firstname} />
@@ -169,14 +173,18 @@ export default class PackageForm extends Component {
                {/*should probably REFACTOR state to be a select dropdown*/}
                State: <input type="text" data-addr-kind="reciever" name="state" id="receiver_state" onChange={this.handleSRChange} value={this.state.receiver.state} />
                Zipcode: <input type="text" data-addr-kind="reciever" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} /><br/>
+               Phone: <input type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required<br/>
             </p>
             <p>Shipping Service: <br/>
                {this.renderProviderOptions()}
                {this.renderServiceOptions()}
             </p>
             <p>Weight: 
-            <input type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
+            <input type="number" name="weight" value={this.state.weight} onChange={this.handleChange} /><br />
+            Cost: <input type="number" name="cost" value={this.state.cost} onChange={this.handleChange} />
             </p>
+            Note: <input type="text" name="note" id="note" value={this.state.note} onChange={this.handleChange} />
+            Tracking Number: <input type="text" name="trackingNum" id="trackingNum" value={this.state.trackingNum} onChange={this.handleChange} /><br />
             <input type="submit" value="Create Package" />
             <br/>
          </form>
