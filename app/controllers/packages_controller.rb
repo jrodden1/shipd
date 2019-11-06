@@ -17,6 +17,7 @@ class PackagesController < ApplicationController
 
   # POST /packages
   def create
+    binding.pry
     @package = Package.new(package_params)
 
     if @package.save
