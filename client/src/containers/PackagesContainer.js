@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Packages from '../components/package/Packages'
+import { fetchPackages /*, addPackage, deletePackage */} from '../actions/PackageActions'
 
 class PackagesContainer extends Component {
+   componentDidMount() {
+      this.props.fetchPackages()
+   }
+   
    render() {
       console.log("Packages Container Props", this.props)
       return (
@@ -29,5 +34,12 @@ const mapStateToProps = store => {
    }
 }
 
+const mapDispatchToProps = dispatch => {
+   return {
+      fetchPackages: () => dispatch(fetchPackages()),
+      //addPackage: newPackage => dispatch(addPackage(newPackage)),
+      //deletePackage: pack => dispatch(deletePackage(pack))
+   }
+}
 
-export default connect(mapStateToProps)(PackagesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(PackagesContainer)

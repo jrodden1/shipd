@@ -11,7 +11,6 @@ import ReportsContainer from './containers/ReportsContainer'
 class App extends Component {
 
   render() {
-    console.log("App Props", this.props)
     return (
       <Router>
         <div>
