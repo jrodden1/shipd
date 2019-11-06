@@ -17,9 +17,8 @@ class PackagesController < ApplicationController
 
   # POST /packages
   def create
-    binding.pry
     @package = Package.new(package_params)
-
+    
     if @package.save
       render json: @package, 
         include: [:sender, :receiver],
@@ -56,7 +55,32 @@ class PackagesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
+    # I have a feeling this is going to break -- I need to be able to intercept the params first, find_or_create sender and reciever, then add their IDs to the params, then do strong params??? 
     def package_params
-      params.require(:package).permit(:weight, :service_provider, :service, :cost, :tracking_num, :note, :sender_id, :receiver_id)
+      params.require(:package).permit(:weight, :service_provider, :service, :cost, :tracking_num, :note, 
+        sender_attributes: 
+          [
+            :firstname, 
+            :lastname, 
+            :company, 
+            :street1, 
+            :street2, 
+            :city, 
+            :state, 
+            :zip,
+            :phone
+          ], 
+        receiver_attributes: 
+        [
+          :firstname, 
+          :lastname, 
+          :company, 
+          :street1, 
+          :street2, 
+          :city, 
+          :state, 
+          :zip,
+          :phone,
+        ])
     end
 end
