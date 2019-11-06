@@ -3,7 +3,7 @@ import Package from './Package'
 import PackageForm from './PackageForm'
 //import { Link } from 'react-router'
 
-const Packages = ({ packages }) => {
+const Packages = ({ packages, createPackage }) => {
    const formatPackages = () => {
       //REFACTOR ; Code clean up.  I can remove this console log and make this a one line arrow function depending upon formatting.
       console.log("formatPackages", packages)
@@ -13,7 +13,7 @@ const Packages = ({ packages }) => {
    console.log("Packages comp packages prop", packages)
    return (
       <div>
-         <PackageForm 
+         <PackageForm createPackage={createPackage}
             serviceProviders={
                {
                   FedEx: ["Overnight", "2 Day", "Express Saver", "Ground"],

@@ -6,5 +6,29 @@ export const fetchPackages = () => {
          .then(packagesRaw => dispatch({type: "ADD_PACKAGES", packages: packagesRaw}))
    }
 }
+export const createPackage = (newPackageObj) => {
+   
+   debugger
+   const dataObject = {
+      package: {
+         //rest of my params here
+         //weight: newPackageObj.weight // could also do some deconstruction above this and make this simpler
+      }
+   }
 
-export default fetchPackages
+   const postOptionsObj = {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+      },
+      body: JSON.stringify(dataObject)
+   }
+
+   return (dispatch) => {
+      dispatch({type: "CREATE_PACKAGE"})
+      fetch("http://localhost:3001/packages", postOptionsObj)
+         .then(resp => resp.json())
+         .then(packageRaw => dispatch({type: "ADD_PACKAGE", package: packageRaw}))
+   }
+}
