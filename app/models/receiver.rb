@@ -7,6 +7,8 @@ class Receiver < ApplicationRecord
    validates :city, presence: true
    validates :state, presence: true 
    validates :zip, presence: true
+   validates :phone, presence: true, uniqueness: true
+   validates_numericality_of :phone, only_integer: true, greater_than: 0, less_than: 9999999999
    validates_numericality_of :zip, only_integer: true, greater_than: 0, less_than: 99999
    
    #Custom Validator
@@ -20,5 +22,4 @@ class Receiver < ApplicationRecord
       end
    end
    
-
 end
