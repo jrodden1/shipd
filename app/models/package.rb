@@ -11,7 +11,6 @@ class Package < ApplicationRecord
    def sender_attributes=(attributes)
       found_by_phone = Sender.find_by(phone: attributes["phone"])
       self.sender = found_by_phone ? found_by_phone : Sender.new(attributes)
-      binding.pry
    end
    
    def receiver_attributes=(attributes)
