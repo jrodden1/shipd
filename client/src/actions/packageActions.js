@@ -30,3 +30,21 @@ export const createPackage = (newPackageObj) => {
          .then(packageRaw => dispatch({type: "ADD_PACKAGE", package: packageRaw}))
    }
 }
+
+export const deletePackage = pkgId => {
+
+   const deleteOptionsObj = {
+      method: 'DELETE',
+      headers: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+      }
+   }
+
+   return (dispatch) => {
+      dispatch({type: "DELETE_PACKAGE"})
+      fetch(`http://localhost:3001/packages/${pkgId}`, deleteOptionsObj)
+         .then(resp => resp.json())
+         .then(() => dispatch({type: "DESTROY_PACKAGE", pkgId: pkgId}))
+   }
+}

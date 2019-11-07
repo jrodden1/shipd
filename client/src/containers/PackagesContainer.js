@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Packages from '../components/package/Packages'
-import { fetchPackages, createPackage, /* deletePackage */} from '../actions/PackageActions'
+import { fetchPackages, createPackage, deletePackage } from '../actions/PackageActions'
 
 class PackagesContainer extends Component {
    componentDidMount() {
@@ -17,8 +17,12 @@ class PackagesContainer extends Component {
                return (
                   <React.Fragment>
                      <h3>welcome to Packages Container</h3>
-                     
-                     <Packages createPackage={this.props.createPackage} packages={this.props.packages} />
+
+                     <Packages 
+                        packages={this.props.packages} 
+                        createPackage={this.props.createPackage}
+                        deletePackage={this.props.deletePackage}
+                     />
                   </React.Fragment>
                )
             }}/>
@@ -38,9 +42,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
    return {
       fetchPackages: () => dispatch(fetchPackages()),
-      createPackage: (newPackage) => dispatch(createPackage(newPackage))
-      //addPackage: newPackage => dispatch(addPackage(newPackage)),
-      //deletePackage: pack => dispatch(deletePackage(pack))
+      createPackage: newPackage => dispatch(createPackage(newPackage)),
+      deletePackage: pkgId => dispatch(deletePackage(pkgId))
    }
 }
 
