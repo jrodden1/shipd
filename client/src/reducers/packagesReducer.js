@@ -10,6 +10,7 @@ state = {
 }
 
 */
+import reportServiceProviderStats from '../helpers/ReportsHelpers'
 
 export const packagesReducer = (
    state = {
@@ -25,7 +26,8 @@ export const packagesReducer = (
       deletingPackage: false,
       reports: 
          {
-            totalPackages: 0
+            totalPackages: 0,
+            ...reportServiceProviderStats([])
          }  
    }, action) => {
    
@@ -44,7 +46,8 @@ export const packagesReducer = (
             packages: action.packages,
             loadingPackages: false,
             reports: {
-               totalPackages: action.packages.length
+               totalPackages: action.packages.length,
+               ...reportServiceProviderStats(action.packages)
             }
             //for more reports, I can have different lines in this report object that can call functions that I import from somewhere else (I'll have to pass in action.packages as a arg but then they can spit out other info like "totalUPS(action.packages)")
          }
@@ -63,7 +66,8 @@ export const packagesReducer = (
                packages: updatedPackagesArr,
                creatingPackage: false,
                reports: {
-                  totalPackages: updatedPackagesArr.length
+                  totalPackages: updatedPackagesArr.length,
+                  ...reportServiceProviderStats(updatedPackagesArr)
                }
                //for more reports, I can have different lines in this report object that can call functions that I import from somewhere else (I'll have to pass in action.packages as a arg but then they can spit out other info like "totalUPS(action.packages)")
             }
@@ -81,7 +85,8 @@ export const packagesReducer = (
                ...state,
                packages: newPackagesArr,
                reports: {
-                  totalPackages: newPackagesArr.length
+                  totalPackages: newPackagesArr.length,
+                  ...reportServiceProviderStats(newPackagesArr)
                }
                //for more reports, I can have different lines in this report object that can call functions that I import from somewhere else (I'll have to pass in action.packages as a arg but then they can spit out other info like "totalUPS(action.packages)")
             }

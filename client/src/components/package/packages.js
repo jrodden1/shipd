@@ -1,6 +1,7 @@
 import React from 'react';
 import Package from './Package'
 import PackageForm from './PackageForm'
+import serviceProviders from '../../helpers/serviceProviderHelpers'
 //import { Link } from 'react-router'
 
 const Packages = ({ packages, createPackage, deletePackage }) => {
@@ -15,13 +16,7 @@ const Packages = ({ packages, createPackage, deletePackage }) => {
       <div>
          {formatPackages()}
          <PackageForm createPackage={createPackage}
-            serviceProviders={
-               {
-                  FedEx: ["Overnight", "2 Day", "Express Saver", "Ground"],
-                  UPS: ["Ground", "Next Day Air", "2nd Day Air", "3 Day Select"],
-                  USPS: ["Priority Mail Express", "Priority Mail", "First-Class Mail"]
-               }
-            }
+            serviceProviders={serviceProviders}
          />
       </div>
    );
