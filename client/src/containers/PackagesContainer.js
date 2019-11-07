@@ -24,9 +24,21 @@ class PackagesContainer extends Component {
                         deletePackage={this.props.deletePackage}
                      />
                   </React.Fragment>
-               )
-            }}/>
-            <Route path={`${this.props.match.url}/:packageId`} render={routerProps => <Packages {...routerProps} createPackage={this.props.createPackage} packages={this.props.packages} />} />         
+               )}}
+            />
+            <Route path={`${this.props.match.url}/:packageId`} render={routerProps => {
+               //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component.  REFACTOR
+               const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
+               return (
+                  <React.Fragment>
+                     <Packages 
+                        {...routerProps} 
+                        createPackage={this.props.createPackage} 
+                        packages={pkg}
+                     />
+                  </React.Fragment>
+               )}}
+            />
          </div>
       )
    }

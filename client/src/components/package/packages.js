@@ -13,6 +13,7 @@ const Packages = ({ packages, createPackage, deletePackage }) => {
    console.log("Packages comp packages prop", packages)
    return (
       <div>
+         {formatPackages()}
          <PackageForm createPackage={createPackage}
             serviceProviders={
                {
@@ -22,7 +23,6 @@ const Packages = ({ packages, createPackage, deletePackage }) => {
                }
             }
          />
-         {formatPackages()}
       </div>
    );
 }
