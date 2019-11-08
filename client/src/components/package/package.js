@@ -2,6 +2,8 @@ import React from 'react';
 import { Card } from 'react-bootstrap'
 import { Component } from 'react'
 
+
+//Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
 export default class Package extends Component {
    
    handleDeleteBtn = event => {

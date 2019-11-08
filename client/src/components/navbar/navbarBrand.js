@@ -1,11 +1,19 @@
 import React from 'react';
 import shipdLogo from '../../shipd.svg'
+import { Navbar } from 'react-bootstrap'
 
 const navbarBrand = () => {
    return (
-      <React.Fragment>
-         <img src={shipdLogo} style={{width: 50, height: 50}} alt="Shipd Logo" /><span>Shipd</span>
-      </React.Fragment>
+      <Navbar.Brand href="#home">
+         <img
+         alt=""
+         src={shipdLogo}
+         width="45"
+         height="45"
+         className="d-inline-block align-center"
+         />
+         {`       Shipd`}
+      </Navbar.Brand>
    );
 }
 
