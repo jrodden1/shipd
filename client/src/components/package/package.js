@@ -80,7 +80,7 @@ export default class Package extends Component {
 
       return (
          <div>
-            <Card>
+            <Card style={{flex: 1, width: '18rem'}} bg="light" text="black">
                <Card.Body>
                   {senderInfo()}<br />
                   {receiverInfo()}<br />

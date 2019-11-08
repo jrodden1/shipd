@@ -16,8 +16,7 @@ class PackagesContainer extends Component {
             <Route exact path={this.props.match.url} render={() => {
                return (
                   <React.Fragment>
-                     <h3>welcome to Packages Container</h3>
-
+                     <br/>
                      <Packages 
                         packages={this.props.packages} 
                         createPackage={this.props.createPackage}
@@ -33,6 +32,7 @@ class PackagesContainer extends Component {
                const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
                return (
                   <React.Fragment>
+                     <br/>
                      <Packages 
                         {...routerProps} 
                         createPackage={this.props.createPackage} 
