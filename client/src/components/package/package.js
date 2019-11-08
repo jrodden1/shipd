@@ -91,7 +91,7 @@ export default class Package extends Component {
                   Cost: {cost}<br />
                   <button onClick={this.handleDeleteBtn}> Delete Package </button>  
                </Card.Body>
-            </Card>
+            </Card><br />
          </div>
       )
    }

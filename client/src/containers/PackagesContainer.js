@@ -22,11 +22,13 @@ class PackagesContainer extends Component {
                         packages={this.props.packages} 
                         createPackage={this.props.createPackage}
                         deletePackage={this.props.deletePackage}
+                        history={this.props.history}
                      />
                   </React.Fragment>
                )}}
             />
             <Route path={`${this.props.match.url}/:packageId`} render={routerProps => {
+               console.log("Route - by Id")
                //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component.  REFACTOR
                const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
                return (
@@ -35,6 +37,7 @@ class PackagesContainer extends Component {
                         {...routerProps} 
                         createPackage={this.props.createPackage} 
                         packages={pkg}
+                        history={this.props.history}
                      />
                   </React.Fragment>
                )}}
@@ -54,7 +57,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
    return {
       fetchPackages: () => dispatch(fetchPackages()),
-      createPackage: newPackage => dispatch(createPackage(newPackage)),
+      createPackage: (newPackage, history) => dispatch(createPackage(newPackage, history)),
       deletePackage: pkgId => dispatch(deletePackage(pkgId))
    }
 }

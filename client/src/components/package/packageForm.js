@@ -58,8 +58,8 @@ export default class PackageForm extends Component {
             ...this.state.receiver
          }
       }
-      // use a callback here to send the state to the container like:
-      this.props.createPackage(newPackage)
+   
+      this.props.createPackage(newPackage, this.props.history)
    }
 
    handleSPChange = event => {
@@ -147,7 +147,7 @@ export default class PackageForm extends Component {
       }
 
    }
-
+   //This Render method is huge.  Could probably make the sender and receiver components separate items to render
    render() {
       return (
          <form onSubmit={this.handleSubmit}>

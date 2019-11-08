@@ -6,7 +6,7 @@ export const fetchPackages = () => {
          .then(packagesRaw => dispatch({type: "ADD_PACKAGES", packages: packagesRaw}))
    }
 }
-export const createPackage = (newPackageObj) => {
+export const createPackage = (newPackageObj, history) => {
 
    const dataObject = {
       package: {
@@ -21,13 +21,17 @@ export const createPackage = (newPackageObj) => {
          'Accept': 'application/json'
       },
       body: JSON.stringify(dataObject)
-   }
+}
 
    return (dispatch) => {
       dispatch({type: "CREATE_PACKAGE"})
       fetch("http://localhost:3001/packages", postOptionsObj)
          .then(resp => resp.json())
-         .then(packageRaw => dispatch({type: "ADD_PACKAGE", package: packageRaw}))
+         .then(packageRaw => {
+            dispatch({type: "ADD_PACKAGE", package: packageRaw})
+            history.push(`/packages/${packageRaw.id}`)
+            //update this above if I'd like to go to /packages instead
+         })
    }
 }
 
