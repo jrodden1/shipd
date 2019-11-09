@@ -18,17 +18,3 @@ const NavbarContainer = () => {
 }
 
 export default NavbarContainer;
-
-// const NavbarContainer = () => {
-//    return (
-//       <Row>
-//          <Col><NavbarBrand /></Col>   
-//          <Col md="auto"></Col>
-//          <Col><NavbarLinks /></Col>   
-//       </Row>
-//    );
-// }
-
-// export default NavbarContainer;
-
-
