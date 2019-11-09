@@ -1,6 +1,6 @@
 import React from 'react';
 import shipdIntroVideo from '../../videos/shipd-intro-video.mp4'
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Home = () => {

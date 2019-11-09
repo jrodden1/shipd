@@ -1,9 +1,6 @@
 import React from 'react';
 import serviceProviders from '../../helpers/serviceProviderHelpers'
 import { Card } from 'react-bootstrap'
-import fedexLogo from '../../images/fedex-logo.svg'
-import upsLogo from '../../images/ups-logo.svg'
-import uspsLogo from '../../images/usps-logo.svg'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
 //I am getting the data in the reports prop to be able to eventually make it so that the numbers for each type of package

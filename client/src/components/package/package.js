@@ -14,8 +14,6 @@ export default class Package extends Component {
 
    render() {
       const { 
-         sender, 
-         receiver, 
          id, 
          service, 
          service_provider,
