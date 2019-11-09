@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap'
 import fedexLogo from '../../images/fedex-logo.svg'
 import upsLogo from '../../images/ups-logo.svg'
 import uspsLogo from '../../images/usps-logo.svg'
+import getProviderLogo from '../../helpers/LogoHelpers'
 
 //I am getting the data in the reports prop to be able to eventually make it so that the numbers for each type of package
 //will be links that will show the packages
@@ -11,18 +12,7 @@ const Reports = ({ reports }) => {
    console.log("Reports Props", reports)
 
    //this requires manual updating if additional providers are added. REFACTOR
-   const getProviderLogo = (provider) => {
-      switch (provider) {
-         case "FedEx":
-            return <img src={fedexLogo} alt="FedEx Logo"/>
-         case "UPS":
-            return <img src={upsLogo} alt="UPS Logo"/>
-         case "USPS":
-            return <img src={uspsLogo} alt="USPS Logo" style={{width: 50, height: 50}}/>
-         default:
-            return ""
-      } 
-   }
+   
 
    const renderProviderStats = () => {
       const serviceProviderNames = Object.keys(serviceProviders)
