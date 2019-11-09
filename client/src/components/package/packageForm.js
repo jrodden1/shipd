@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Form, Row, Col, Container, Card } from 'react-bootstrap'
+import { stateList } from '../../helpers/PackageHelpers.js'
 
 export default class PackageForm extends Component {
    constructor(props) {
@@ -14,7 +16,7 @@ export default class PackageForm extends Component {
             street1: "",
             street2: "",
             city: "",
-            state: "",
+            state: "AL",
             zip: "",
             phone: ""
          },
@@ -25,7 +27,7 @@ export default class PackageForm extends Component {
             street1: "",
             street2: "",
             city: "",
-            state: "",
+            state: "AL",
             zip: "",
             phone: ""
          },
@@ -36,8 +38,7 @@ export default class PackageForm extends Component {
          weight: "",
          cost: "",
          trackingNum: "",
-         note: "",
-         phone: ""
+         note: ""
       }
    }
    
@@ -81,23 +82,6 @@ export default class PackageForm extends Component {
          serviceOptionSelected: event.target.value
       })
    }
-
-   renderProviderOptions = () => {
-      const serviceProviderNames = Object.keys(this.state.serviceProviders)
-      return (
-         <select value={this.state.serviceProviderSelected} onChange={this.handleSPChange}>
-            {serviceProviderNames.map((provider, i) => <option key={i} value={provider}>{provider}</option>)}
-         </select>
-      )
-   }
-
-   renderServiceOptions = () => {
-      return (
-         <select value={this.state.serviceOptionSelected} onChange={this.handleSOChange}>
-            {this.state.serviceProviderOptions.map((pOption, i) => <option key={i} value={pOption}>{pOption}</option>)}
-         </select>
-      )
-   }
    
    handleChange = event => {
       const { name, value } = event.target
@@ -109,8 +93,8 @@ export default class PackageForm extends Component {
 
    }
 
+   //Handle Sender or Receiver Change of input
    handleSRChange = event => {
-      //debugger
       const kind = event.target.getAttribute("data-addr-kind")
       const {name, value} = event.target
 
@@ -147,47 +131,239 @@ export default class PackageForm extends Component {
       }
 
    }
+
+   renderProviderOptions = () => {
+      const serviceProviderNames = Object.keys(this.state.serviceProviders)
+      return (
+         <Form.Control as="select" value={this.state.serviceProviderSelected} onChange={this.handleSPChange}>
+            {serviceProviderNames.map((provider, i) => <option key={i} value={provider}>{provider}</option>)}
+         </Form.Control>
+      )
+   }
+
+   renderServiceOptions = () => {
+      return (
+         <Form.Control as="select" value={this.state.serviceOptionSelected} onChange={this.handleSOChange}>
+            {this.state.serviceProviderOptions.map((pOption, i) => <option key={i} value={pOption}>{pOption}</option>)}
+         </Form.Control>
+      )
+   }
+
+   renderStateList = (shipperType) => {
+      if (shipperType === "sender") {
+         return (
+            <Form.Control as="select" name="state" id="sender_state" type="select" data-addr-kind="sender" value={this.state.sender.state} onChange={this.handleSRChange}>
+               {stateList.map((usaState, i) => <option key={i} value={usaState}>{usaState}</option>)}
+            </Form.Control>
+         )
+      } else {
+         return (
+            <Form.Control as="select" name="state" id="receiver_state" data-addr-kind="receiver" value={this.state.receiver.state} onChange={this.handleSRChange}>
+               {stateList.map((usaState, i) => <option key={i} value={usaState}>{usaState}</option>)}
+            </Form.Control>
+         )
+      }
+   }
+
    //This Render method is huge.  Could probably make the sender and receiver components separate items to render
    render() {
       return (
-         <form onSubmit={this.handleSubmit}>
-            <p><strong>Sender:</strong><br/>
-               Firstname: <input type="text" data-addr-kind="sender" name="firstname" id="sender_firstname" onChange={this.handleSRChange} value={this.state.sender.firstname} />
-               Lastname: <input type="text" data-addr-kind="sender" name="lastname" id="sender_lastname" onChange={this.handleSRChange} value={this.state.sender.lastname} /><br/>
-               Company: <input type="text" data-addr-kind="sender" name="company" id="sender_company" onChange={this.handleSRChange} value={this.state.sender.company} /><br/>
-               Street Line 1: <input type="text" data-addr-kind="sender" name="street1" id="sender_street1" onChange={this.handleSRChange} value={this.state.sender.street1} /><br/>
-               Street Line 2: <input type="text" data-addr-kind="sender" name="street2" id="sender_street2" onChange={this.handleSRChange} value={this.state.sender.street2} /><br/>
-               City: <input type="text" data-addr-kind="sender" name="city" id="sender_city" onChange={this.handleSRChange} value={this.state.sender.city} />
-               {/*should probably REFACTOR state to be a select dropdown*/}
-               State: <input type="text" data-addr-kind="sender" name="state" id="sender_state" onChange={this.handleSRChange} value={this.state.sender.state} />
-               Zipcode: <input type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} /><br/>
-               Phone: <input type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />*Required<br/>
-            </p>
-            <p><strong>Receiver:</strong><br/>
-               Firstname: <input type="text" data-addr-kind="reciever" name="firstname" id="receiver_firstname" onChange={this.handleSRChange} value={this.state.receiver.firstname} />
-               Lastname: <input type="text" data-addr-kind="reciever" name="lastname" id="receiver_lastname" onChange={this.handleSRChange} value={this.state.receiver.lastname} /><br/>
-               Company: <input type="text" data-addr-kind="reciever" name="company" id="receiver_company" onChange={this.handleSRChange} value={this.state.receiver.company} /><br/>
-               Street Line 1: <input type="text" data-addr-kind="reciever" name="street1" id="receiver_street1" onChange={this.handleSRChange} value={this.state.receiver.street1} /><br/>
-               Street Line 2: <input type="text" data-addr-kind="reciever" name="street2" id="receiver_street2" onChange={this.handleSRChange} value={this.state.receiver.street2} /><br/>
-               City: <input type="text" data-addr-kind="reciever" name="city" id="receiver_city" onChange={this.handleSRChange} value={this.state.receiver.city} />
-               {/*should probably REFACTOR state to be a select dropdown*/}
-               State: <input type="text" data-addr-kind="reciever" name="state" id="receiver_state" onChange={this.handleSRChange} value={this.state.receiver.state} />
-               Zipcode: <input type="text" data-addr-kind="reciever" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} /><br/>
-               Phone: <input type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required<br/>
-            </p>
-            <p>Shipping Service: <br/>
-               {this.renderProviderOptions()}
-               {this.renderServiceOptions()}
-            </p>
-            <p>Weight: 
-            <input type="number" name="weight" value={this.state.weight} onChange={this.handleChange} /><br />
-            Cost: <input type="number" name="cost" value={this.state.cost} onChange={this.handleChange} />
-            </p>
-            Note: <input type="text" name="note" id="note" value={this.state.note} onChange={this.handleChange} />
-            Tracking Number: <input type="text" name="trackingNum" id="trackingNum" value={this.state.trackingNum} onChange={this.handleChange} /><br />
-            <input type="submit" value="Create Package" />
+         <Container style={{paddingTop: "2rem"}}>
+         <h2 className="text-center">Create New Package</h2><br/>
+         <Card bg="light" variant="light" style={{padding: "2rem"}}>
+         <Form onSubmit={this.handleSubmit}>
+            <h3>Sender</h3>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Firstname: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="firstname" id="sender_firstname" onChange={this.handleSRChange} value={this.state.sender.firstname} />
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Lastname: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="lastname" id="sender_lastname" onChange={this.handleSRChange} value={this.state.sender.lastname} />
+                  </Form.Group>
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Company: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="company" id="sender_company" onChange={this.handleSRChange} value={this.state.sender.company} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Street Line 1: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="street1" id="sender_street1" onChange={this.handleSRChange} value={this.state.sender.street1} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Street Line 2: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="street2" id="sender_street2" onChange={this.handleSRChange} value={this.state.sender.street2} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>City: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="city" id="sender_city" onChange={this.handleSRChange} value={this.state.sender.city} />
+                  </Form.Group>
+               </Col>
+               <Col>   
+                  <Form.Group>
+                     <Form.Label>State: </Form.Label>
+                     {this.renderStateList("sender")}
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Zipcode: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} />
+                  </Form.Group>   
+               </Col>
+            </Row>     
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Phone: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />*Required
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <br />
+            <h3>Receiver</h3>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Firstname: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="firstname" id="receiver_firstname" onChange={this.handleSRChange} value={this.state.receiver.firstname} />
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Lastname: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="lastname" id="receiver_lastname" onChange={this.handleSRChange} value={this.state.receiver.lastname} />
+                  </Form.Group>
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Company: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="company" id="receiver_company" onChange={this.handleSRChange} value={this.state.receiver.company} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Street Line 1: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="street1" id="receiver_street1" onChange={this.handleSRChange} value={this.state.receiver.street1} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Street Line 2: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="street2" id="receiver_street2" onChange={this.handleSRChange} value={this.state.receiver.street2} />
+                  </Form.Group>   
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>City: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="city" id="receiver_city" onChange={this.handleSRChange} value={this.state.receiver.city} />
+                  </Form.Group>
+               </Col>
+               <Col>   
+                  <Form.Group>
+                     <Form.Label>State: </Form.Label>
+                     {this.renderStateList("receiver")}
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Zipcode: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} />
+                  </Form.Group>   
+               </Col>
+            </Row>     
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Phone: </Form.Label>
+                     <Form.Control type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required
+                  </Form.Group>   
+               </Col>
+            </Row><br/>
+            <h3>Package Shipping Details</h3>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Shipping Provider: </Form.Label><br />
+                     {this.renderProviderOptions()}
+                  </Form.Group>     
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Shipping Service: </Form.Label><br />
+                     {this.renderServiceOptions()}
+                  </Form.Group>     
+               </Col>
+            </Row>
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Weight <em>in lb(s):</em> </Form.Label>
+                     <Form.Control type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Cost: </Form.Label>
+                     <Form.Control type="number" name="cost" value={this.state.cost} onChange={this.handleChange} />
+                  </Form.Group>
+               </Col>
+            </Row>   
+            
+
+            <Row>
+               <Col>
+                  <Form.Group>
+                     <Form.Label>Tracking Number: </Form.Label>
+                     <Form.Control type="text" name="trackingNum" id="trackingNum" value={this.state.trackingNum} onChange={this.handleChange} /><br />
+                  </Form.Group>
+               </Col>
+               <Col>
+                  <Form.Group>   
+                     <Form.Label>Note: </Form.Label>
+                     <Form.Control type="text" name="note" id="note" value={this.state.note} onChange={this.handleChange} />
+                  </Form.Group>
+               </Col>
+            </Row>
+            <Row>
+               <Col md={{ span: 4, offset: 4 }}>
+                  <Form.Control className="btn btn-secondary" type="submit" value="Create Package" />
+               </Col>
+            </Row>
+            
+            
             <br/>
-         </form>
+            
+         </Form>
+         </Card>
+         </Container>
       )
    }
 }

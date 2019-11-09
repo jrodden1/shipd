@@ -41,7 +41,7 @@ export default class Package extends Component {
                      {service}
                      </Col>
                      <Col className="text-center align-self-center">
-                        Weight: {weight} lbs<br />
+                        Weight: {weight} lb(s)<br />
                         Cost: ${cost}
                      </Col>
                   </Row>
@@ -52,11 +52,8 @@ export default class Package extends Component {
                </Card.Body>
                <Card.Footer >
                   <Row style={{paddingRight: "10px", paddingLeft: "10px"}} className="justify-content-between">
-                        <Button  variant="danger" onClick={this.handleDeleteBtn}> Delete Package </Button>
-
-                     
-                        <Button  variant="secondary" onClick={() => this.props.setModalShow(true, this.props.pkg)}>Details</Button>   
-                     
+                     <Button  variant="danger" onClick={this.handleDeleteBtn}> Delete Package </Button>
+                     <Button  variant="secondary" onClick={() => this.props.setModalShow(true, this.props.pkg)}>Details</Button>   
                   </Row>   
                </Card.Footer>
             </Card><br />
@@ -64,8 +61,6 @@ export default class Package extends Component {
       )
    }
 }
-      
-      
       
 
 // const Package = ({ pkg }) => {
