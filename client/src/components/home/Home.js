@@ -1,6 +1,6 @@
 import React from 'react';
-import typingVideo from '../../videos/typing.mp4'
-import { Card, Row, Col } from 'react-bootstrap'
+import shipdIntroVideo from '../../videos/shipd-intro-video.mp4'
+import { Card, Row, Col, Button } from 'react-bootstrap'
 
 const Home = () => {
    //Need to see if I can loop thru a few videos or just simply drop all these videos into 1 file to make it easier. #shrug 
@@ -23,29 +23,30 @@ const Home = () => {
                zIndex: -100,
                transform: "translateX(-50%) translateY(-50%)",
                backgroundSize: "cover" }}>
-            <source src={typingVideo} type="video/mp4" />
+            <source src={shipdIntroVideo} type="video/mp4" />
          </video>
-         <Row style={{alignContent: "center", justifyContent: "space-between", padding: "5rem"}}>
+         <Row  style={{justifyContent: "space-between", padding: "5rem"}}>
             <Col>
                <Card style={{background: "rgba(0,0,0,0.3)", color: "white", width: "auto", height: "20rem"}}>
                   <Card.Body className="text-center">
-                     <h3>Welcome to Shipd!</h3>
-                     <h4>To get started, choose one of the options below:</h4>
-                     <Row style={{flexDirection: "row", alignContent: "center", justifyContent: "space-evenly"}}>
+                     <h3>Welcome to Shipd!</h3><br/>
+                     <h4>To get started, choose one of the options below:</h4><br />
+                     <Row style={{display: "flex", flexDirection: "row", alignContent: "center", justifyContent: "center"}}>
                         <Col>
                            <Card style={{flex: 1, background: "rgba(0,0,0,0.5)"}}>
                               <Card.Body>
-                                 Option One Goes here!
+                                 If you don't have any packages created yet or you want to view your existing packages, pick me!<br/><br/>
+                                 <Button bg="secondary" variant="secondary">Go To Packages</Button>
                               </Card.Body>
                            </Card>
                         </Col>
+                        <Col>
                            <Card style={{flex: 1, background: "rgba(0,0,0,0.5)"}}>
                               <Card.Body>
-                                 Option Two Goes here!
+                                 If you already have packages and want to view reports about them, pick me!<br/><br/>
+                                 <Button bg="secondary" variant="secondary">Go To Reports</Button>
                               </Card.Body>
                            </Card>
-                        <Col>
-                        
                         </Col>
                      </Row>
                   </Card.Body>
