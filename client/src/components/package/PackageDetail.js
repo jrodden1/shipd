@@ -63,7 +63,7 @@ const PackageDetail = (props) => {
       </Modal>
    );} else {
       return (
-         <div>no modal needed yet</div>
+         <div data-modal="no-modal-needed-yet"></div>
       )
    }
 }

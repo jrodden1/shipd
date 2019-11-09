@@ -1,9 +1,7 @@
 import React from 'react';
 import Package from './Package'
-import PackageForm from './PackageForm'
-import serviceProviders from '../../helpers/serviceProviderHelpers'
-//import { Link } from 'react-router'
-import { Row, Col, CardDeck, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { CardDeck } from 'react-bootstrap'
 
 const Packages = ({ packages, createPackage, deletePackage, history, setModalShow, modalShow }) => {
    const formatPackages = () => {
@@ -12,22 +10,13 @@ const Packages = ({ packages, createPackage, deletePackage, history, setModalSho
       return packages.map(pkg => <Package key={pkg.id} pkg={pkg} deletePackage={deletePackage} setModalShow={setModalShow} modalShow={modalShow} />)
    }
    
-   
-
-
    console.log("Packages comp packages prop", packages)
    return (
-      <div>
+      <div className="text-center">
+         <Link to="/packages/new" className="btn btn-secondary">Create New Package</Link><br /><br />
          <CardDeck style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
             {formatPackages()}
          </CardDeck>
-                  
-         
-         <PackageForm 
-            createPackage={createPackage}
-            serviceProviders={serviceProviders}
-            history={history}
-         />
       </div>
    );
 }

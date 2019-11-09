@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Packages from '../components/package/Packages'
 import { fetchPackages, createPackage, deletePackage } from '../actions/PackageActions'
 import PackageDetail from '../components/package/PackageDetail'
+import PackageForm from '../components/package/PackageForm'
+import serviceProviders from '../helpers/serviceProviderHelpers'
 
 class PackagesContainer extends Component {
    constructor(props) {
@@ -21,8 +23,6 @@ class PackagesContainer extends Component {
       })
    }
 
-            
-
    componentDidMount() {
       this.props.fetchPackages()
    }
@@ -31,45 +31,55 @@ class PackagesContainer extends Component {
       console.log("Packages Container Props", this.props)
       return (
          <div>
-            <Route exact path={this.props.match.url} render={() => {
-               return (
-                  <React.Fragment>
-                     <br/>
-                     <Packages 
-                        packages={this.props.packages} 
+            <Switch>
+               <Route exact path={this.props.match.url} render={() => {
+                  return (
+                     <React.Fragment>
+                        <br/>
+                        <Packages 
+                           packages={this.props.packages} 
+                           createPackage={this.props.createPackage}
+                           deletePackage={this.props.deletePackage}
+                           setModalShow={this.setModalShow}
+                           modalShow={this.state.modalShow}
+                           history={this.props.history}
+                        />
+                     </React.Fragment>
+                  )}}
+               />
+               <Route exact path={`${this.props.match.url}/new`} render={() => {
+                  return (
+                     <PackageForm 
                         createPackage={this.props.createPackage}
-                        deletePackage={this.props.deletePackage}
-                        setModalShow={this.setModalShow}
-                        modalShow={this.state.modalShow}
+                        serviceProviders={serviceProviders}
                         history={this.props.history}
                      />
-                  </React.Fragment>
-               )}}
-            />
-            <Route path={`${this.props.match.url}/:packageId`} render={routerProps => {
-               console.log("Route - by Id")
-               //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component.  REFACTOR
-               const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
-               return (
-                  <React.Fragment>
-                     <br/>
-                     <Packages 
-                        {...routerProps} 
-                        createPackage={this.props.createPackage} 
-                        packages={pkg}
-                        deletePackage={this.props.deletePackage}
-                        setModalShow={this.setModalShow}
-                        history={this.props.history}
-                     />
-                  </React.Fragment>
-               )}}
-            />
+                  )}} 
+               />
+               <Route path={`${this.props.match.url}/:packageId`} render={routerProps => {
+                  console.log("Route - by Id")
+                  //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component.  REFACTOR
+                  const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
+                  return (
+                     <React.Fragment>
+                        <br/>
+                        <Packages 
+                           {...routerProps} 
+                           createPackage={this.props.createPackage} 
+                           packages={pkg}
+                           deletePackage={this.props.deletePackage}
+                           setModalShow={this.setModalShow}
+                           history={this.props.history}
+                        />
+                     </React.Fragment>
+                  )}}
+               />
+            </Switch>
             <PackageDetail 
                package={this.state.modalPackage}
                show={this.state.modalShow}
                onHide={() => this.setModalShow(false)}
                history={this.props.history}
-               deletePackage={this.props.deletePackage}
             />
          </div>
       )
