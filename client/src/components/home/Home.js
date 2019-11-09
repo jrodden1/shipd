@@ -1,6 +1,7 @@
 import React from 'react';
 import shipdIntroVideo from '../../videos/shipd-intro-video.mp4'
 import { Card, Row, Col, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
    //Need to see if I can loop thru a few videos or just simply drop all these videos into 1 file to make it easier. #shrug 
@@ -36,7 +37,11 @@ const Home = () => {
                            <Card style={{flex: 1, background: "rgba(0,0,0,0.5)"}}>
                               <Card.Body>
                                  If you don't have any packages created yet or you want to view your existing packages, pick me!<br/><br/>
-                                 <Button bg="secondary" variant="secondary">Go To Packages</Button>
+                                 <Link 
+                                    className="btn btn-secondary"
+                                    to="/packages">
+                                    Go To Packages
+                                 </Link>
                               </Card.Body>
                            </Card>
                         </Col>
@@ -44,7 +49,11 @@ const Home = () => {
                            <Card style={{flex: 1, background: "rgba(0,0,0,0.5)"}}>
                               <Card.Body>
                                  If you already have packages and want to view reports about them, pick me!<br/><br/>
-                                 <Button bg="secondary" variant="secondary">Go To Reports</Button>
+                                 <Link 
+                                    className="btn btn-secondary"
+                                    to="/reports">
+                                    Go To Reports
+                                 </Link>
                               </Card.Body>
                            </Card>
                         </Col>
