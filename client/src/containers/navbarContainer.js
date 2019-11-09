@@ -1,14 +1,13 @@
 import React from 'react';
 import NavbarBrand from '../components/navbar/NavbarBrand'
 import NavbarLinks from '../components/navbar/NavbarLinks'
-import { Row, Col, Navbar } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import { Nav } from 'react-bootstrap'
 
-import shipdLogo from '../shipd.svg'
 const NavbarContainer = () => {
    return (
       <React.Fragment>
-         <Navbar bg="dark" variant="dark">
+         <Navbar className="justify-content-center" bg="dark" variant="dark">
             <NavbarBrand />
             <Nav style={{color: "#FFFFFF"}} className="light">
                <NavbarLinks />

@@ -5,21 +5,21 @@ import { Nav } from 'react-bootstrap'
 const NavbarLinks = () => {
    return (
       <React.Fragment>
-      <Nav.Link>
+      <Nav.Link as="div">
          <NavLink  
             to="/"
             style={{color: "grey"}}>
             Home
          </NavLink>
       </Nav.Link>
-      <Nav.Link>
+      <Nav.Link as="div">
          <NavLink 
             to="/packages"
             style={{color: "grey"}}>
             Packages
          </NavLink>
       </Nav.Link>
-      <Nav.Link>
+      <Nav.Link as="div">
          <NavLink 
             to="/reports"
             style={{color: "grey"}}>
