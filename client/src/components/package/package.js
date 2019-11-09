@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card } from 'react-bootstrap'
+import { Card, Button, Row, Col } from 'react-bootstrap'
 import { Component } from 'react'
+import { senderInfo, receiverInfo } from '../../helpers/PackageHelpers'
+import getProviderLogo from '../../helpers/LogoHelpers'
 
 
 //Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
@@ -23,84 +25,48 @@ export default class Package extends Component {
          note
       } = this.props.pkg
 
-      // I can refactor these two methods to outside of the render method to tidy this up.  Just need to pass in the package object to these methods 
-      const senderInfo = () => {
-         const haveNames = sender.firstname && sender.lastname
-         const haveCompany = !!sender.company
-         
-         //Possibly refactor this so its more performant with most common case first
-         if (haveNames && haveCompany) {
-            return (
-               <React.Fragment>
-                  Sender: {`${sender.firstname} ${sender.lastname}`}<br/>
-                  Company: {sender.company}<br/>
-               </React.Fragment>
-            )
-         } else if (haveNames && !haveCompany) {
-            return (
-               <React.Fragment>
-                  Sender: {`${sender.firstname} ${sender.lastname}`}
-               </React.Fragment>
-            )
-         } else if (!haveNames && haveCompany) {
-            return (
-               <React.Fragment>
-                  Sender: {`${sender.company} (Company)`}
-               </React.Fragment>
-            )
-         }
-      }
-
-      const receiverInfo = () => {
-         const haveNames = receiver.firstname && receiver.lastname
-         const haveCompany = !!receiver.company
-         
-         //Possibly refactor this so its more performant
-         if (haveNames && haveCompany) {
-            return (
-               <React.Fragment>
-                  Receiver: {`${receiver.firstname} ${receiver.lastname}`} <br />
-                  Company: {receiver.company}<br/>
-               </React.Fragment>
-            )
-         } else if (haveNames && !haveCompany) {
-            return (
-               <React.Fragment>
-                  Receiver: {`${receiver.firstname} ${receiver.lastname}`}
-               </React.Fragment>
-            )
-         } else if (!haveNames && haveCompany) {
-            return (
-               <React.Fragment>
-                  Receiver: {`${receiver.company} (Company)`}
-               </React.Fragment>
-            )
-         }
-      }
-
       return (
          <div>
-            <Card style={{flex: 1, width: '18rem'}} bg="light" text="black">
+            <Card style={{flex: 1, width: '25rem'}} bg="light" text="black">
+               <Card.Header>
+                  {getProviderLogo("shipd")} Shipd Package Id: {id}
+               </Card.Header>
                <Card.Body>
-                  {senderInfo()}<br />
-                  {receiverInfo()}<br />
-                  Package No: {id}<br/>
-                  Service Provider: {service_provider} <br/>
-                  Package Service: {service}<br/>
-                  Weight: {weight}<br />
-                  Note: {note}<br />
-                  Tracking: {tracking_num}<br />
-                  Cost: {cost}<br />
-                  <button onClick={this.handleDeleteBtn}> Delete Package </button>  
+                  <Row>
+                     <Col style={{width: 11}} className="text-center">{senderInfo(this.props.pkg)}</Col>
+                     <Col style={{width: 11}} className="text-center">{receiverInfo(this.props.pkg)}</Col>
+                  </Row>
+                  <Row style={{padding: "10px"}}>
+                     <Col className="text-center">{getProviderLogo(service_provider)}<br/>
+                     {service}
+                     </Col>
+                     <Col className="text-center align-self-center">
+                        Weight: {weight} lbs<br />
+                        Cost: ${cost}
+                     </Col>
+                  </Row>
+                  <Row style={{alignContent: "center", justifyContent: "center", padding: "10px"}}>
+                     Tracking: {tracking_num}<br />
+                     Note: {note}
+                  </Row>
                </Card.Body>
+               <Card.Footer >
+                  <Row style={{paddingRight: "10px", paddingLeft: "10px"}} className="justify-content-between">
+                        <Button  variant="danger" onClick={this.handleDeleteBtn}> Delete Package </Button>
+
+                     
+                        <Button  variant="secondary" onClick={() => this.props.setModalShow(true, this.props.pkg)}>Details</Button>   
+                     
+                  </Row>   
+               </Card.Footer>
             </Card><br />
          </div>
       )
    }
 }
-
-
-
+      
+      
+      
 
 // const Package = ({ pkg }) => {
 //    return (

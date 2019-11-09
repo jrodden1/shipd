@@ -3,12 +3,30 @@ import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Packages from '../components/package/Packages'
 import { fetchPackages, createPackage, deletePackage } from '../actions/PackageActions'
+import PackageDetail from '../components/package/PackageDetail'
 
 class PackagesContainer extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         modalShow: false, 
+         modalPackage: this.props.packages[0]
+      }
+   }
+   
+   setModalShow = (value, pkg) => {
+      this.setState({
+         modalShow: value,
+         modalPackage: pkg
+      })
+   }
+
+            
+
    componentDidMount() {
       this.props.fetchPackages()
    }
-   
+
    render() {
       console.log("Packages Container Props", this.props)
       return (
@@ -21,6 +39,8 @@ class PackagesContainer extends Component {
                         packages={this.props.packages} 
                         createPackage={this.props.createPackage}
                         deletePackage={this.props.deletePackage}
+                        setModalShow={this.setModalShow}
+                        modalShow={this.state.modalShow}
                         history={this.props.history}
                      />
                   </React.Fragment>
@@ -37,10 +57,19 @@ class PackagesContainer extends Component {
                         {...routerProps} 
                         createPackage={this.props.createPackage} 
                         packages={pkg}
+                        deletePackage={this.props.deletePackage}
+                        setModalShow={this.setModalShow}
                         history={this.props.history}
                      />
                   </React.Fragment>
                )}}
+            />
+            <PackageDetail 
+               package={this.state.modalPackage}
+               show={this.state.modalShow}
+               onHide={() => this.setModalShow(false)}
+               history={this.props.history}
+               deletePackage={this.props.deletePackage}
             />
          </div>
       )
