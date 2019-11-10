@@ -3,6 +3,7 @@ import Reports from '../components/report/Reports'
 import { connect } from 'react-redux'
 import { Component } from 'react'
 import { fetchPackages } from '../actions/PackageActions'
+import Loading from '../helpers/Loading'
 
 class ReportsContainer extends Component {
    componentDidMount () {
@@ -10,18 +11,24 @@ class ReportsContainer extends Component {
    }
    
    render() {
-      console.log("ReportsContainer Props", this.props)
-      return (
-         <div>
-            <Reports reports={this.props.reports} />
-         </div>
-      )
-   }
-}
+      if (this.props.loadingPackages) {
+         return (
+            <Loading />
+         )
+      } else {
+         return (
+            <div>
+               <Reports reports={this.props.reports} />
+            </div>
+         )
+      }
+   } 
+} 
 
 const mapStateToProps = storeState => {
    return {
-      reports: storeState.packagesReducer.reports
+      reports: storeState.packagesReducer.reports,
+      loadingPackages: storeState.packagesReducer.loadingPackages
    }
 }
 
@@ -32,12 +39,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsContainer)
-// const ReportsContainer = () => {
-//    return (
-//       <div>
-//          Welcome to reports container.  Here I'll need to connect to the store and grab some props to pass down to the Reports component
-//       </div>
-//    );
-// }
-
-// export default ReportsContainer;
