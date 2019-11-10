@@ -53,9 +53,6 @@ const PackageDetail = (props) => {
                   <Button  variant="secondary" onClick={props.onHide}> Close </Button>
             </Row>   
          </Modal.Footer>
-         
-         
-        
       </Modal>
    );} else {
       return (
@@ -63,33 +60,6 @@ const PackageDetail = (props) => {
       )
    }
 }
+
 export default PackageDetail;
-
-/*
- <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-               {service_provider} Package Detail
-            </Modal.Title>
-         </Modal.Header>
-         <Modal.Body>
-            <Row>
-               <Col>
-               <h4>Sender</h4>
-               <p>
-                  {sender.firstname} {sender.lastname}
-                  {sender.company ? `${sender.company} <br />` : <br /> }
-               </p>
-               </Col>
-               <Col>
-               <h4>Receiver</h4>
-               <p>{receiver.firstname} {receiver.lastname}</p>
-
-               </Col>
-            </Row>
-         </Modal.Body>
-         <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-         </Modal.Footer>
-*/
-
                
