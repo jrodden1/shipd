@@ -35,8 +35,8 @@ export const createPackage = (newPackageObj, history) => {
    }
 }
 
-export const deletePackage = pkgId => {
-
+export const deletePackage = (pkgId, history) => {
+   
    const deleteOptionsObj = {
       method: 'DELETE',
       headers: {
@@ -49,6 +49,9 @@ export const deletePackage = pkgId => {
       dispatch({type: "DELETE_PACKAGE"})
       fetch(`http://localhost:3001/packages/${pkgId}`, deleteOptionsObj)
          .then(resp => resp.json())
-         .then(() => dispatch({type: "DESTROY_PACKAGE", pkgId: pkgId}))
+         .then(() => {
+            dispatch({type: "DESTROY_PACKAGE", pkgId: pkgId})
+            history.push('/packages')
+         })
    }
 }

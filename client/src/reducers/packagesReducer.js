@@ -84,6 +84,7 @@ export const packagesReducer = (
             return {
                ...state,
                packages: newPackagesArr,
+               deletingPackage: false,
                reports: {
                   totalPackages: newPackagesArr.length,
                   ...reportServiceProviderStats(newPackagesArr)

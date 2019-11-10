@@ -136,7 +136,7 @@ const mapDispatchToProps = dispatch => {
    return {
       fetchPackages: () => dispatch(fetchPackages()),
       createPackage: (newPackage, history) => dispatch(createPackage(newPackage, history)),
-      deletePackage: pkgId => dispatch(deletePackage(pkgId))
+      deletePackage: (pkgId, history) => dispatch(deletePackage(pkgId, history))
    }
 }
 

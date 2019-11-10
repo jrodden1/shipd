@@ -110,10 +110,13 @@ const stateList =
       "SC", "SD",  "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
    ]
 
+const formattedCost = (costRaw) => parseFloat(costRaw).toFixed(2).toString()
+
 export {
    senderInfo,
    receiverInfo,
    addressInfo,
-   stateList
+   stateList,
+   formattedCost
 }
 

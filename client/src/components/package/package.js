@@ -3,6 +3,7 @@ import { Card, Button, Row, Col } from 'react-bootstrap'
 import { Component } from 'react'
 import { senderInfo, receiverInfo } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
+import { formattedCost } from '../../helpers/PackageHelpers'
 
 //Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
 export default class Package extends Component {
@@ -22,18 +23,18 @@ export default class Package extends Component {
          note
       } = this.props.pkg
 
-      const formattedCost = parseFloat(cost).toFixed(2).toString()
+      
 
       return (
          <div>
-            <Card style={{flex: 1, width: '25rem'}} bg="light" text="black">
+            <Card style={{flex: 1, width: '28rem'}} bg="light" text="black">
                <Card.Header>
                   {getProviderLogo("shipd")} Shipd Package Id: {id}
                </Card.Header>
                <Card.Body>
                   <Row>
-                     <Col style={{width: 11}} className="text-center">{senderInfo(this.props.pkg)}</Col>
-                     <Col style={{width: 11}} className="text-center">{receiverInfo(this.props.pkg)}</Col>
+                     <Col style={{width: 13}} className="text-center">{senderInfo(this.props.pkg)}</Col>
+                     <Col style={{width: 13}} className="text-center">{receiverInfo(this.props.pkg)}</Col>
                   </Row>
                   <Row style={{padding: "10px"}}>
                      <Col className="text-center">{getProviderLogo(service_provider)}<br/>
@@ -41,7 +42,7 @@ export default class Package extends Component {
                      </Col>
                      <Col className="text-center align-self-center">
                         Weight: {weight} lb(s)<br />
-                        Cost: ${formattedCost}
+                        Cost: ${formattedCost(cost)}
                      </Col>
                   </Row>
                   <Row style={{alignContent: "center", justifyContent: "center", padding: "10px"}}>
