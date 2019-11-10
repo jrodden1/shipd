@@ -22,6 +22,8 @@ export default class Package extends Component {
          note
       } = this.props.pkg
 
+      const formattedCost = parseFloat(cost).toFixed(2).toString()
+
       return (
          <div>
             <Card style={{flex: 1, width: '25rem'}} bg="light" text="black">
@@ -39,7 +41,7 @@ export default class Package extends Component {
                      </Col>
                      <Col className="text-center align-self-center">
                         Weight: {weight} lb(s)<br />
-                        Cost: ${cost}
+                        Cost: ${formattedCost}
                      </Col>
                   </Row>
                   <Row style={{alignContent: "center", justifyContent: "center", padding: "10px"}}>

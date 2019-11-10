@@ -6,6 +6,7 @@ import getProviderLogo from '../../helpers/LogoHelpers'
 const PackageDetail = (props) => {
    if (props.package) {
       const { id, weight, service_provider, service, cost, note, receiver, sender, tracking_num, created_at, updated_at } = props.package
+      const formattedCost = parseFloat(cost).toFixed(2).toString()
    return (
       <Modal
          {...props}
@@ -34,13 +35,13 @@ const PackageDetail = (props) => {
                </Col>
                <Col className="text-center align-self-center">
                   Weight: {weight} lbs<br />
-                  Cost: ${cost}
+                  Cost: ${formattedCost}
                </Col>
             </Row>
             <Row style={{alignContent: "center", justifyContent: "space-evenly", padding: "10px"}}>
                <Col className="text-center">
-                  Tracking: {tracking_num}<br />
-                  Note: {note}
+                  Tracking: {(tracking_num ? tracking_num : `None Specified`)}<br />
+                  Note: {(note ? note : `None Specified`)}
                </Col>   
                <Col className="text-center">
                   Created: {new Date(created_at).toLocaleString()}<br/>
