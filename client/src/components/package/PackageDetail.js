@@ -20,16 +20,12 @@ const PackageDetail = (props) => {
          <Modal.Body>
             <Row>
                <Col className="text-center" >
-                  <p>
                      {senderInfo(props.package)}
                      {addressInfo(sender)}<br />
-                  </p>     
                </Col>
                <Col className="text-center">
-                  <p>
                      {receiverInfo(props.package)}   
                      {addressInfo(receiver)}<br />
-                  </p>   
                </Col>
             </Row>
             <Row style={{padding: "10px"}}>
