@@ -129,7 +129,13 @@ export default class PackageForm extends Component {
             serviceOptionSelected: this.state.serviceOptionSelected
          })
       }
+   }
 
+   formatCostInput = (event) => {
+      event.target.value = parseFloat(event.target.value).toFixed(2)
+      this.setState({
+         cost: event.target.value.toString()
+      })
    }
 
    renderProviderOptions = () => {
@@ -177,13 +183,13 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Firstname: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="firstname" id="sender_firstname" onChange={this.handleSRChange} value={this.state.sender.firstname} />
+                     <Form.Control required type="text" data-addr-kind="sender" name="firstname" id="sender_firstname" onChange={this.handleSRChange} value={this.state.sender.firstname} />
                   </Form.Group>
                </Col>
                <Col>
                   <Form.Group>
                      <Form.Label>Lastname: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="lastname" id="sender_lastname" onChange={this.handleSRChange} value={this.state.sender.lastname} />
+                     <Form.Control required type="text" data-addr-kind="sender" name="lastname" id="sender_lastname" onChange={this.handleSRChange} value={this.state.sender.lastname} />
                   </Form.Group>
                </Col>
             </Row>
@@ -199,7 +205,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Street Line 1: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="street1" id="sender_street1" onChange={this.handleSRChange} value={this.state.sender.street1} />
+                     <Form.Control required type="text" data-addr-kind="sender" name="street1" id="sender_street1" onChange={this.handleSRChange} value={this.state.sender.street1} />
                   </Form.Group>   
                </Col>
             </Row>
@@ -215,7 +221,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>City: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="city" id="sender_city" onChange={this.handleSRChange} value={this.state.sender.city} />
+                     <Form.Control required type="text" data-addr-kind="sender" name="city" id="sender_city" onChange={this.handleSRChange} value={this.state.sender.city} />
                   </Form.Group>
                </Col>
                <Col>   
@@ -227,7 +233,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Zipcode: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} />
+                     <Form.Control required type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} />
                   </Form.Group>   
                </Col>
             </Row>     
@@ -235,7 +241,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Phone: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />*Required
+                     <Form.Control required type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />
                   </Form.Group>   
                </Col>
             </Row>
@@ -245,13 +251,13 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Firstname: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="firstname" id="receiver_firstname" onChange={this.handleSRChange} value={this.state.receiver.firstname} />
+                     <Form.Control required type="text" data-addr-kind="receiver" name="firstname" id="receiver_firstname" onChange={this.handleSRChange} value={this.state.receiver.firstname} />
                   </Form.Group>
                </Col>
                <Col>
                   <Form.Group>
                      <Form.Label>Lastname: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="lastname" id="receiver_lastname" onChange={this.handleSRChange} value={this.state.receiver.lastname} />
+                     <Form.Control required type="text" data-addr-kind="receiver" name="lastname" id="receiver_lastname" onChange={this.handleSRChange} value={this.state.receiver.lastname} />
                   </Form.Group>
                </Col>
             </Row>
@@ -267,7 +273,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Street Line 1: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="street1" id="receiver_street1" onChange={this.handleSRChange} value={this.state.receiver.street1} />
+                     <Form.Control required type="text" data-addr-kind="receiver" name="street1" id="receiver_street1" onChange={this.handleSRChange} value={this.state.receiver.street1} />
                   </Form.Group>   
                </Col>
             </Row>
@@ -283,7 +289,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>City: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="city" id="receiver_city" onChange={this.handleSRChange} value={this.state.receiver.city} />
+                     <Form.Control required type="text" data-addr-kind="receiver" name="city" id="receiver_city" onChange={this.handleSRChange} value={this.state.receiver.city} />
                   </Form.Group>
                </Col>
                <Col>   
@@ -295,7 +301,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Zipcode: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} />
+                     <Form.Control required type="text" data-addr-kind="receiver" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} />
                   </Form.Group>   
                </Col>
             </Row>     
@@ -303,7 +309,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Phone: </Form.Label>
-                     <Form.Control type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required
+                     <Form.Control required type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required
                   </Form.Group>   
                </Col>
             </Row><br/>
@@ -326,13 +332,24 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Weight <em>in lb(s):</em> </Form.Label>
-                     <Form.Control type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
+                     <Form.Control required className="validate" min="1" step="1" type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
                   </Form.Group>
                </Col>
                <Col>
                   <Form.Group>
                      <Form.Label>Cost: </Form.Label>
-                     <Form.Control type="number" name="cost" value={this.state.cost} onChange={this.handleChange} />
+                     <Form.Control 
+                        required 
+                        className="validate" 
+                        type="number" 
+                        name="cost" 
+                        value={this.state.cost}
+                        onChange={this.handleChange}
+                        onBlur={this.formatCostInput} 
+                        min="0.00" 
+                        step=".01" 
+                        pattern="\d+(\.\d{2})?"
+                        />
                   </Form.Group>
                </Col>
             </Row>   

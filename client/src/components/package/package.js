@@ -43,8 +43,8 @@ export default class Package extends Component {
                      </Col>
                   </Row>
                   <Row style={{alignContent: "center", justifyContent: "center", padding: "10px"}}>
-                     Tracking: {tracking_num}<br />
-                     Note: {note}
+                     Tracking: {(tracking_num ? tracking_num : `None Specified`)}<br />
+                     Note: {(note ? note : `None Specified`)}
                   </Row>
                </Card.Body>
                <Card.Footer >
