@@ -124,7 +124,6 @@ class PackagesContainer extends Component {
 }
 
 const mapStateToProps = store => {
-   console.log("StoreState", store)
    return {
       packages: store.packagesReducer.packages,
       loadingPackages: store.packagesReducer.loadingPackages,
