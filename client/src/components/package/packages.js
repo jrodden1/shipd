@@ -3,9 +3,9 @@ import Package from './Package'
 import { Link } from 'react-router-dom'
 import { CardDeck } from 'react-bootstrap'
 
-const Packages = ({ packages, createPackage, deletePackage, history, setModalShow, modalShow }) => {
+const Packages = ({ packages, createPackage, deleteModalShow, history, setModalShow, modalShow }) => {
    const formatPackages = () => {
-      return packages.map(pkg => <Package key={pkg.id} pkg={pkg} deletePackage={deletePackage} setModalShow={setModalShow} modalShow={modalShow} />)
+      return packages.map(pkg => <Package key={pkg.id} pkg={pkg} deleteModalShow={deleteModalShow} setModalShow={setModalShow} modalShow={modalShow} />)
    }
    
    return (

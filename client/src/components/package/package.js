@@ -4,12 +4,11 @@ import { Component } from 'react'
 import { senderInfo, receiverInfo } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
-
 //Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
 export default class Package extends Component {
    
    handleDeleteBtn = event => {
-      this.props.deletePackage(this.props.pkg.id)
+      this.props.deleteModalShow(true, this.props.pkg)
    }
 
    render() {

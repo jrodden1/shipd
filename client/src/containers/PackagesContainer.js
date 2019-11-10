@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Packages from '../components/package/Packages'
 import { fetchPackages, createPackage, deletePackage } from '../actions/PackageActions'
 import PackageDetail from '../components/package/PackageDetail'
+import DeletePackageModal from '../components/package/DeletePackageModal'
 import PackageForm from '../components/package/PackageForm'
 import serviceProviders from '../helpers/serviceProviderHelpers'
 
@@ -12,7 +13,9 @@ class PackagesContainer extends Component {
       super(props);
       this.state = {
          modalShow: false, 
-         modalPackage: this.props.packages[0]
+         modalPackage: this.props.packages[0],
+         deleteModalShow: false,
+         deleteModalPackage: this.props.packages[0]
       }
    }
    
@@ -20,6 +23,13 @@ class PackagesContainer extends Component {
       this.setState({
          modalShow: value,
          modalPackage: pkg
+      })
+   }
+
+   deleteModalShow = (value, pkg) => {
+      this.setState({
+         deleteModalShow: value,
+         deleteModalPackage: pkg
       })
    }
 
@@ -39,7 +49,7 @@ class PackagesContainer extends Component {
                         <Packages 
                            packages={this.props.packages} 
                            createPackage={this.props.createPackage}
-                           deletePackage={this.props.deletePackage}
+                           deleteModalShow={this.deleteModalShow}
                            setModalShow={this.setModalShow}
                            modalShow={this.state.modalShow}
                            history={this.props.history}
@@ -67,10 +77,18 @@ class PackagesContainer extends Component {
                            {...routerProps} 
                            createPackage={this.props.createPackage} 
                            packages={pkg}
-                           deletePackage={this.props.deletePackage}
+                           deleteModalShow={this.deleteModalShow}
                            setModalShow={this.setModalShow}
+                           modalshow={this.modalShow}
                            history={this.props.history}
                         />
+                        <div className="text-center">
+                           <Link
+                              to="/packages"
+                              className="btn btn-secondary"
+                           >Back to All Packages
+                           </Link>
+                        </div>
                      </React.Fragment>
                   )}}
                />
@@ -79,6 +97,12 @@ class PackagesContainer extends Component {
                package={this.state.modalPackage}
                show={this.state.modalShow}
                onHide={() => this.setModalShow(false)}
+            />
+            <DeletePackageModal 
+               package={this.state.deleteModalPackage}
+               show={this.state.deleteModalShow}
+               onHide={() => this.deleteModalShow(false)}
+               deletePackage={this.props.deletePackage}
                history={this.props.history}
             />
          </div>
