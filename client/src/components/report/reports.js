@@ -53,7 +53,7 @@ const Reports = ({ reports }) => {
             <Card key="0-card" style={{width: '23rem'}} bg="light" text="black">
                <Card.Body>
                   <div className="text-center">
-                     Overall Total Packages: {reports.totalPackages}
+                     {getProviderLogo("shipd")} <strong>Overall Total Packages: {reports.totalPackages}</strong>
                   </div>
                </Card.Body>
             </Card>
