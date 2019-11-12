@@ -8,14 +8,15 @@ class Package < ApplicationRecord
    validates_inclusion_of :service_provider, in: ["UPS", "FedEx", "USPS"]
    validates :service, presence: true
 
+   # These methods below allow for finding or creating of sender/receiver.
    def sender_attributes=(attributes)
-      found_by_phone = Sender.find_by(phone: attributes["phone"])
-      self.sender = found_by_phone ? found_by_phone : Sender.new(attributes)
+      existing_sender = Sender.find_by(attributes)
+      self.sender = existing_sender ? existing_sender : Sender.create(attributes)
    end
    
    def receiver_attributes=(attributes)
-      found_by_phone = Receiver.find_by(phone: attributes["phone"])
-      self.receiver = found_by_phone ? found_by_phone : Receiver.new(attributes)
+      existing_receiver = Receiver.find_by(attributes)
+      self.receiver = existing_receiver ? existing_receiver : Receiver.create(attributes)
    end
    
 end

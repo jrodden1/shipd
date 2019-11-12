@@ -309,7 +309,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Phone: </Form.Label>
-                     <Form.Control required type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />*Required
+                     <Form.Control required type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />
                   </Form.Group>   
                </Col>
             </Row><br/>
