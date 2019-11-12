@@ -1,6 +1,7 @@
-// I can refactor these two methods to outside of the render method to tidy this up.  Just need to pass in the package object to these methods 
 import React from 'react'
 
+//senderInfo helper conditionally displays the names and or company name if applicable.  
+//REFACTOR: receiverInfo and senderInfo helpers should probably be refactored into one function and pass in an argument of a sender or receiver object similar to addressInfo below
 const senderInfo = (pkg) => {
    const { sender } = pkg
 
@@ -41,6 +42,7 @@ const senderInfo = (pkg) => {
    }
 }
 
+//receiverInfo helper conditionally displays the names and or company name if applicable.  
 const receiverInfo = (pkg) => {
    const { receiver } = pkg
 
@@ -81,6 +83,7 @@ const receiverInfo = (pkg) => {
    }
 }
 
+//addressInfo helper takes in a shipperObject - a receiver or sender and then prints out 
 const addressInfo = (shipperObj) => {
    const { street1, street2, city, state, zip } = shipperObj
    
@@ -101,6 +104,7 @@ const addressInfo = (shipperObj) => {
    }
 }
 
+//Simple stateList helper array for USA states
 const stateList = 
    [
       "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", 
@@ -110,6 +114,7 @@ const stateList =
       "SC", "SD",  "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
    ]
 
+//formats the cost of a package to human readable format (2 fixed decimal places )
 const formattedCost = (costRaw) => parseFloat(costRaw).toFixed(2).toString()
 
 export {

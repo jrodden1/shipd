@@ -1,3 +1,5 @@
+//serviceProviders helper object.  This allows for the app to easily add additional service providers in one place (almost)
+//MANUAL UPDATE LogoHelpers file with any new Providers that get added with the associated logo svg file. 
 const serviceProviders = 
    {
       FedEx: ["Overnight", "2 Day", "Express Saver", "Ground"],

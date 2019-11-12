@@ -8,6 +8,7 @@ import PackagesContainer from './containers/PackagesContainer'
 import NavBar from './containers/NavbarContainer'
 import ReportsContainer from './containers/ReportsContainer'
 
+//Class Component that contains the app.  This also renders the Navbar and initial routes.  
 class App extends Component {
 
   render() {

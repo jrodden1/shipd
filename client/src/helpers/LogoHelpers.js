@@ -2,8 +2,10 @@ import React from 'react'
 import fedexLogo from '../images/fedex-logo.svg'
 import upsLogo from '../images/ups-logo.svg'
 import uspsLogo from '../images/usps-logo.svg'
-import shipdLogo from '../shipd.svg'
+import shipdLogo from '../images/shipd.svg'
 
+//Helper function that returns the logo file based on the input given to it.
+//NOTE: this helper will need manually updated though for additional shippers / REFACTOR
 const getProviderLogo = (provider) => {
    switch (provider) {
       case "FedEx":

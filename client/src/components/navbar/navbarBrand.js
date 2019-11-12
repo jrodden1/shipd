@@ -1,5 +1,5 @@
 import React from 'react';
-import shipdLogo from '../../shipd.svg'
+import shipdLogo from '../../images/shipd.svg'
 import { Navbar } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
