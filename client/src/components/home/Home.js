@@ -27,7 +27,7 @@ const Home = () => {
          </video>
          <Row  style={{justifyContent: "space-between", padding: "5rem"}}>
             <Col>
-               <Card style={{background: "rgba(0,0,0,0.3)", color: "white", width: "auto", height: "20rem"}}>
+               <Card style={{background: "rgba(0,0,0,0.3)", color: "white", width: "auto", height: "auto"}}>
                   <Card.Body className="text-center">
                      <h3>Welcome to Shipd!</h3><br/>
                      <h4>To get started, choose one of the options below:</h4><br />
