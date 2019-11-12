@@ -233,7 +233,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Zipcode: </Form.Label>
-                     <Form.Control required type="text" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} />
+                     <Form.Control required placeholder="5 Digit Zip" type="text" pattern="^\d{5}$" data-addr-kind="sender" name="zip" id="sender_zip" onChange={this.handleSRChange} value={this.state.sender.zip} />
                   </Form.Group>   
                </Col>
             </Row>     
@@ -301,7 +301,7 @@ export default class PackageForm extends Component {
                <Col>
                   <Form.Group>
                      <Form.Label>Zipcode: </Form.Label>
-                     <Form.Control required type="text" data-addr-kind="receiver" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} />
+                     <Form.Control required placeholder="5 Digit Zip" type="text" pattern="^\d{5}$" data-addr-kind="receiver" name="zip" id="receiver_zip" onChange={this.handleSRChange} value={this.state.receiver.zip} />
                   </Form.Group>   
                </Col>
             </Row>     
