@@ -3,6 +3,7 @@ import shipdLogo from '../../shipd.svg'
 import { Navbar } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
+// Functional component that returns the Shipd logo and name
 const navbarBrand = () => {
    return (
       <NavLink to="/">

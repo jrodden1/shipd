@@ -1,7 +1,9 @@
 class Receiver < ApplicationRecord
+   # Relationships
    has_many :packages 
    has_many :senders, through: :packages
 
+   #Validations
    validate :has_company_or_firstname_lastname
    validates :street1, presence: true
    validates :city, presence: true

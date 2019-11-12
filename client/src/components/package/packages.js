@@ -3,12 +3,13 @@ import Package from './Package'
 import { Link } from 'react-router-dom'
 import { CardDeck, Card } from 'react-bootstrap'
 
-const Packages = ({ packages, createPackage, deleteModalShow, history, setModalShow, modalShow }) => {
+// Functional component that renders out a welcome card if no packages yet, or renders out all the packages
+const Packages = ({ packages, deleteModalShow, setModalShow, modalShow }) => {
+   //This helper returns an array of all the packages formatted as Package components
    const formatPackages = () => {
       return packages.map(pkg => <Package key={pkg.id} pkg={pkg} deleteModalShow={deleteModalShow} setModalShow={setModalShow} modalShow={modalShow} />)
    }
    
-
    if (packages.length === 0) {
       return (
          <div className="text-center">

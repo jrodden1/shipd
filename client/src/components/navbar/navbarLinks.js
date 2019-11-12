@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { Nav } from 'react-bootstrap'
 
+//Functional Component that displays the navbar links
 const NavbarLinks = () => {
    return (
       <React.Fragment>

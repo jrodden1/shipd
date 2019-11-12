@@ -9,10 +9,10 @@ class PackagesController < ApplicationController
   end
 
   # GET /packages/1
+  # Not currently used in MVP
   def show
     render json: @package, 
-      include: [:sender, :receiver],
-      except: [:created_at, :updated_at]
+      include: [:sender, :receiver]
   end
 
   # POST /packages
@@ -31,11 +31,11 @@ class PackagesController < ApplicationController
   end
 
   # PATCH/PUT /packages/1
+  # Not currently used in MVP
   def update
     if @package.update(package_params)
       render json: @package, 
-        include: [:sender, :receiver],
-        except: [:created_at, :updated_at]
+        include: [:sender, :receiver]
     else
       render json: @package.errors, 
         status: :unprocessable_entity
@@ -55,7 +55,6 @@ class PackagesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    # I have a feeling this is going to break -- I need to be able to intercept the params first, find_or_create sender and reciever, then add their IDs to the params, then do strong params??? 
     def package_params
       params.require(:package).permit(:weight, :service_provider, :service, :cost, :tracking_num, :note, 
         sender_attributes: 

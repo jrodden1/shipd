@@ -1,9 +1,13 @@
 import React from 'react';
 import { Modal, Button, Row, Col, Card} from 'react-bootstrap'
-import { senderInfo, receiverInfo, addressInfo } from '../../helpers/PackageHelpers'
+import { senderInfo, receiverInfo, addressInfo, formattedCost } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
-import { formattedCost } from '../../helpers/PackageHelpers'
 
+/* 
+This modal takes in a package and the history object.  
+It is a warning modal to ask the user if they are sure they want to delete this package. 
+The delete button on this modal will actually do the deleting.
+*/
 const DeletePackageModal = (props) => {
 
    const handleDeleteBtn = (event) => {

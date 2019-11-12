@@ -3,10 +3,11 @@ import serviceProviders from '../../helpers/serviceProviderHelpers'
 import { Card, CardDeck } from 'react-bootstrap'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
-//I am getting the data in the reports prop to be able to eventually make it so that the numbers for each type of package
-//will be links that will show the packages
+// Functional Component that takes in the reports object and then renders out the reports based on that object
+// Currently it will render out the total packages overall, total packages by provider, and total packages per each provider's service
 const Reports = ({ reports }) => {
    
+   //Maps through all the service provider keys and maps through all the service provider services and creates up the cards for each service provider
    const serviceProvidersStats = () => {
       const serviceProviderNames = Object.keys(serviceProviders)
       return serviceProviderNames.map(provider => {
@@ -38,6 +39,7 @@ const Reports = ({ reports }) => {
       })
    }
 
+   //Renders out a card deck of all the provider's stats
    const renderProviderStats = () => {
       return (
          <CardDeck style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
@@ -46,7 +48,7 @@ const Reports = ({ reports }) => {
       )
    }
          
-
+   //Actually renders out the reports page in the desired format
    return (
       <div style={{padding: "2rem"}}>
          <div style={{paddingBottom: "2rem", display: 'flex', justifyContent: "center"}}>

@@ -1,12 +1,19 @@
 import React from 'react';
 import { Modal, Button, Row, Col} from 'react-bootstrap'
-import { senderInfo, receiverInfo, addressInfo } from '../../helpers/PackageHelpers'
+import { senderInfo, receiverInfo, addressInfo, formattedCost } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
+
+/*
+This functional component displays a modal which shows more in-depth details about a package
+Mainly, the detailed address information for the sender and receiver, and the created_at, and updated_at
+
+Also note for simplicity sake, the Package objects coming back from the Rails backend have been left snake cased
+so that's why you'll see some snake cased variables here.
+*/
 
 const PackageDetail = (props) => {
    if (props.package) {
       const { id, weight, service_provider, service, cost, note, receiver, sender, tracking_num, created_at, updated_at } = props.package
-      const formattedCost = parseFloat(cost).toFixed(2).toString()
    return (
       <Modal
          {...props}
@@ -35,7 +42,7 @@ const PackageDetail = (props) => {
                </Col>
                <Col className="text-center align-self-center">
                   Weight: {weight} lbs<br />
-                  Cost: ${formattedCost}
+                  Cost: ${formattedCost(cost)}
                </Col>
             </Row>
             <Row style={{alignContent: "center", justifyContent: "space-evenly", padding: "10px"}}>
@@ -56,6 +63,7 @@ const PackageDetail = (props) => {
          </Modal.Footer>
       </Modal>
    );} else {
+      // When doing initial loading, and there is no package information passed to the modal, return a blank placeholder div.
       return (
          <div data-modal="no-modal-needed-yet"></div>
       )

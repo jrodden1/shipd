@@ -3,9 +3,8 @@ import shipdIntroVideo from '../../videos/shipd-intro-video.mp4'
 import { Card, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+// Functional component that shows the Shipd home page that contains a looping background video and two option cards. 
 const Home = () => {
-   //Need to see if I can loop thru a few videos or just simply drop all these videos into 1 file to make it easier. #shrug 
-   // Also something is monkeyed up with Flexbox on the nexted Card / row structure... need to look over at PackageDetail to see what's going on
    return (
       <div>   
          <video 

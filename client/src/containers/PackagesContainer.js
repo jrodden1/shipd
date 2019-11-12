@@ -9,9 +9,16 @@ import PackageForm from '../components/package/PackageForm'
 import serviceProviders from '../helpers/serviceProviderHelpers'
 import Loading from '../helpers/Loading.js'
 
+/*
+The switchboard so to speak of my app.
+Packages Container connects to the redux store and manages overall for its children components (except for PackageForm), 
+The Delete confirmation Modal and Package Detail modal live here, also a multitude of callbacks.
+Packages Container also locally manages the state of the modals opening and closing.  I didn't see the need to store that in redux.
+*/
 class PackagesContainer extends Component {
    constructor(props) {
       super(props);
+      //sets the initial state so neither of the modals are showing, and feeds them a package to make them happy
       this.state = {
          modalShow: false, 
          modalPackage: this.props.packages[0],
@@ -20,6 +27,7 @@ class PackagesContainer extends Component {
       }
    }
    
+   //used by Package to toggle a modal on and off. 
    setModalShow = (value, pkg) => {
       this.setState({
          modalShow: value,
@@ -27,6 +35,7 @@ class PackagesContainer extends Component {
       })
    }
 
+   //used by Package to toggle the delete confirmation on and off. 
    deleteModalShow = (value, pkg) => {
       this.setState({
          deleteModalShow: value,
@@ -34,17 +43,34 @@ class PackagesContainer extends Component {
       })
    }
 
+   //Loads all packages after initial mounting of component
    componentDidMount() {
       this.props.fetchPackages()
    }
 
    render() {
+      // Does further routing to 3 urls - /packages, /packages/new/, & /packages/:id
+
+      /* 
+      first Route 
+         /packages - render Loading if doing API work (i.e. loadingPackages, deletingPackages, or creatingPackages is set to true)
+         otherwise, render out a Packages component
+      second Route
+         /packages/new - render the PackageForm for creating a new package
+      third Route
+         /packages/id - render Loading if doing API work (i.e. loadingPackages, deletingPackages, or creatingPackages is set to true)
+         otherwise, first find the specific package from the packages array, 
+         then only pass down that specific package as the packages prop to Packages component, thus only rendering the 1 package
+         This is a package's "show" page, but is only used after the creation of a new package to show the new one. 
+         otherwise, the PackageDetails modal acts as a show page for a package. 
+
+      After the routes comes the two modal components (that are hidden initially)
+      */
       const { loadingPackages, deletingPackage, creatingPackage } = this.props
       return (
          <React.Fragment>
             <Switch>
                <Route exact path={this.props.match.url} render={() => {
-                  
                   if (loadingPackages || deletingPackage || creatingPackage) {
                      return (
                         <Loading />
@@ -80,7 +106,7 @@ class PackagesContainer extends Component {
                         <Loading />
                      )
                   } else {
-                     //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component.  REFACTOR
+                     //grab just the specific package and pass it down to the packages prop... I suppose this logic could be passed down to the Packages component eventually instead of having it here.  REFACTOR
                      const pkg = this.props.packages.filter(pack => pack.id === parseInt(routerProps.match.params.packageId))
                      return (
                         <React.Fragment>
@@ -123,6 +149,7 @@ class PackagesContainer extends Component {
    }
 }
 
+//Connecting to the redux store to grab the state of the following:
 const mapStateToProps = store => {
    return {
       packages: store.packagesReducer.packages,
@@ -132,6 +159,8 @@ const mapStateToProps = store => {
    }
 }
 
+// PackageActions are added used inside of functions (named after the actions) 
+// to dispatch changes to state and hit up the API
 const mapDispatchToProps = dispatch => {
    return {
       fetchPackages: () => dispatch(fetchPackages()),

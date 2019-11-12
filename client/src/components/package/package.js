@@ -4,7 +4,8 @@ import { Component } from 'react'
 import { senderInfo, receiverInfo, formattedCost } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
-//Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
+//This component is the workhorse of my app.  It displays the basic information about a package in a card.
+//This can be REFACTORed into a functional component
 export default class Package extends Component {
    
    handleDeleteBtn = event => {
@@ -21,8 +22,6 @@ export default class Package extends Component {
          cost,
          note
       } = this.props.pkg
-
-      
 
       return (
          <div>
@@ -60,19 +59,3 @@ export default class Package extends Component {
       )
    }
 }
-      
-
-// const Package = ({ pkg }) => {
-//    return (
-//       <div>
-//          Package No: {pkg.id}<br/>
-//          Service Provider: {pkg.service_provider} <br/>
-//          Package Service: {pkg.service}<br/>
-//          Weight: {pkg.weight}
-         
-//          {/* need to display sender and receiver info here to */}
-//       </div>
-//    );
-// }
-
-// export default Package;
