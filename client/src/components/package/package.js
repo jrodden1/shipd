@@ -1,9 +1,8 @@
 import React from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap'
 import { Component } from 'react'
-import { senderInfo, receiverInfo } from '../../helpers/PackageHelpers'
+import { senderInfo, receiverInfo, formattedCost } from '../../helpers/PackageHelpers'
 import getProviderLogo from '../../helpers/LogoHelpers'
-import { formattedCost } from '../../helpers/PackageHelpers'
 
 //Should probably REFACTOR this into a functional component and pass down the handle delete button eventhandler
 export default class Package extends Component {
