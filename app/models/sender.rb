@@ -9,8 +9,7 @@ class Sender < ApplicationRecord
    validates :city, presence: true
    validates :state, presence: true 
    validates :zip, presence: true
-   validates :phone, presence: true
-   validates_numericality_of :phone, only_integer: true, greater_than: 0, less_than: 9999999999
+   validates :phone, presence: true, format: { with: /[0-9]{3}-[0-9]{3}-[0-9]{4}/, message: "Must match phone number format: 555-333-444" }
    validates_numericality_of :zip, only_integer: true, greater_than: 0, less_than: 99999
    #Future REFACTOR: Can also add an "in:" statement here to validate if it is a valid zipcode from an array of zips; leaving this out of MVP
    #validates_inclusion_of :zip, in: VALID_US_ZIP_CODES

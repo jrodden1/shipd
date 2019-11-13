@@ -1,7 +1,9 @@
 class Package < ApplicationRecord
    # Relationships
-   belongs_to :receiver
    belongs_to :sender
+   belongs_to :receiver
+   validates_associated :sender
+   validates_associated :receiver
 
    # Validations
    validates :weight, presence: true

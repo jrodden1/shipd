@@ -30,10 +30,12 @@ const PackageDetail = (props) => {
                <Col className="text-center" >
                      {senderInfo(props.package)}
                      {addressInfo(sender)}<br />
+                     {sender.phone}
                </Col>
                <Col className="text-center">
                      {receiverInfo(props.package)}   
                      {addressInfo(receiver)}<br />
+                     {receiver.phone}
                </Col>
             </Row>
             <Row style={{padding: "10px"}}>

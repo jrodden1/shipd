@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Row, Col, Container, Card } from 'react-bootstrap'
+import { Form, Row, Col, Container, Card, InputGroup } from 'react-bootstrap'
 import { stateList, formattedCost } from '../../helpers/PackageHelpers.js'
 
 /*
@@ -267,7 +267,7 @@ export default class PackageForm extends Component {
                      <Col>
                         <Form.Group>
                            <Form.Label>Phone: </Form.Label>
-                           <Form.Control required type="text" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />
+                           <Form.Control required type="tel" placeholder="555-333-4444" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" data-addr-kind="sender" name="phone" id="sender_phone" onChange={this.handleSRChange} value={this.state.sender.phone} />
                         </Form.Group>   
                      </Col>
                   </Row>
@@ -335,7 +335,7 @@ export default class PackageForm extends Component {
                      <Col>
                         <Form.Group>
                            <Form.Label>Phone: </Form.Label>
-                           <Form.Control required type="text" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />
+                           <Form.Control required type="tel" placeholder="555-333-4444" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" data-addr-kind="receiver" name="phone" id="receiver_phone" onChange={this.handleSRChange} value={this.state.receiver.phone} />
                         </Form.Group>   
                      </Col>
                   </Row><br/>
@@ -357,25 +357,35 @@ export default class PackageForm extends Component {
                   <Row>
                      <Col>
                         <Form.Group>
-                           <Form.Label>Weight <em>in lb(s):</em> </Form.Label>
-                           <Form.Control required className="validate" min="1" step="1" type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
+                           <Form.Label>Weight</Form.Label>
+                           <InputGroup>
+                              <Form.Control required className="validate" min="1" step="1" type="number" name="weight" value={this.state.weight} onChange={this.handleChange} />
+                              <InputGroup.Append>
+                                 <InputGroup.Text id="inputGroupAppend">lb(s)</InputGroup.Text>
+                              </InputGroup.Append>
+                           </InputGroup>
                         </Form.Group>
                      </Col>
                      <Col>
                         <Form.Group>
                            <Form.Label>Cost: </Form.Label>
-                           <Form.Control 
-                              required 
-                              className="validate" 
-                              type="number" 
-                              name="cost" 
-                              value={this.state.cost}
-                              onChange={this.handleChange}
-                              onBlur={this.formatCostInput} 
-                              min="0.00" 
-                              step=".01" 
-                              pattern="\d+(\.\d{2})?"
-                              />
+                           <InputGroup>
+                              <InputGroup.Prepend>
+                                 <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
+                              </InputGroup.Prepend>
+                              <Form.Control 
+                                 required 
+                                 className="validate" 
+                                 type="number" 
+                                 name="cost" 
+                                 value={this.state.cost}
+                                 onChange={this.handleChange}
+                                 onBlur={this.formatCostInput} 
+                                 min="0.00" 
+                                 step=".01" 
+                                 pattern="\d+(\.\d{2})?"
+                                 />
+                           </InputGroup>
                         </Form.Group>
                      </Col>
                   </Row>   
