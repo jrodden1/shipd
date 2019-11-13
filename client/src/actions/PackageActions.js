@@ -9,7 +9,7 @@
 export const fetchPackages = () => {
    return (dispatch) => {
       dispatch({type: "FETCH_PACKAGES"})
-      fetch(/*baseUrl + */"/packages")
+      fetch(/*baseUrl + */"/api/packages")
          .then(resp => resp.json())
          .then(packagesRaw => dispatch({type: "ADD_PACKAGES", packages: packagesRaw}))
    }
@@ -36,7 +36,7 @@ export const createPackage = (newPackageObj, history) => {
 
    return (dispatch) => {
       dispatch({type: "CREATE_PACKAGE"})
-      fetch(/*baseUrl + */"/packages", postOptionsObj)
+      fetch(/*baseUrl + */"/api/packages", postOptionsObj)
          .then(resp => resp.json())
          .then(packageRaw => {
             dispatch({type: "ADD_PACKAGE", package: packageRaw})
@@ -58,7 +58,7 @@ export const deletePackage = (pkgId, history) => {
 
    return (dispatch) => {
       dispatch({type: "DELETE_PACKAGE"})
-      fetch(/*baseUrl + */`/packages/${pkgId}`, deleteOptionsObj)
+      fetch(/*baseUrl + */`/api/packages/${pkgId}`, deleteOptionsObj)
          .then(resp => resp.json())
          .then(() => {
             dispatch({type: "DESTROY_PACKAGE", pkgId: pkgId})
