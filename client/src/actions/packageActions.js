@@ -1,11 +1,15 @@
 // This file contains actions relating to Packages.  Note that `thunk` is being used
-const baseUrl = "http://localhost:3001"  //this is the current URL of the Rails backend
+// const baseUrl = "http://localhost:3001"  this is the current URL of the Rails backend
+// since making this Heroku ready, the localhost:3001 is already implied using the proxy setup in packages.json.  
+// to revert this change, simply uncomment line two and then add it back into the 
+// fetch calls below before the "/packages" or whatever.  
+
 
 // This action does fetching of all packages from the backend api
 export const fetchPackages = () => {
    return (dispatch) => {
       dispatch({type: "FETCH_PACKAGES"})
-      fetch(baseUrl + "/packages")
+      fetch(/*baseUrl + */"/packages")
          .then(resp => resp.json())
          .then(packagesRaw => dispatch({type: "ADD_PACKAGES", packages: packagesRaw}))
    }
@@ -32,7 +36,7 @@ export const createPackage = (newPackageObj, history) => {
 
    return (dispatch) => {
       dispatch({type: "CREATE_PACKAGE"})
-      fetch(baseUrl + "/packages", postOptionsObj)
+      fetch(/*baseUrl + */"/packages", postOptionsObj)
          .then(resp => resp.json())
          .then(packageRaw => {
             dispatch({type: "ADD_PACKAGE", package: packageRaw})
@@ -54,7 +58,7 @@ export const deletePackage = (pkgId, history) => {
 
    return (dispatch) => {
       dispatch({type: "DELETE_PACKAGE"})
-      fetch(baseUrl + `/packages/${pkgId}`, deleteOptionsObj)
+      fetch(/*baseUrl + */`/packages/${pkgId}`, deleteOptionsObj)
          .then(resp => resp.json())
          .then(() => {
             dispatch({type: "DESTROY_PACKAGE", pkgId: pkgId})
