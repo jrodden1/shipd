@@ -4,7 +4,7 @@ import './index.css'; //not sure I need this line
 import App from './App';
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware /*, compose */} from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers/rootReducer'
 
@@ -15,10 +15,11 @@ import rootReducer from './reducers/rootReducer'
 //REFACTOR: when deploying to heroku, remove the compose() function and its details and replace it simply with applyMiddleware(thunk)
 const store = createStore(
    rootReducer,
-   compose(
-      applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-   )
+   // compose(
+   //    applyMiddleware(thunk),
+   //    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   // )
+   applyMiddleware(thunk)
 )
 
 
