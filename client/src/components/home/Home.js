@@ -25,7 +25,7 @@ const Home = () => {
                backgroundSize: "cover" }}>
             <source src={shipdIntroVideo} type="video/mp4" />
          </video>
-         <Row  style={{justifyContent: "space-between", padding: "5rem"}}>
+         <Row  style={{justifyContent: "space-between", margin: "1rem"}}>
             <Col>
                <Card style={{background: "rgba(0,0,0,0.3)", color: "white", width: "auto", height: "auto"}}>
                   <Card.Body className="text-center">
@@ -33,7 +33,7 @@ const Home = () => {
                      <h4>To get started, choose one of the options below:</h4><br />
                      <Row style={{display: "flex", flexDirection: "row", alignContent: "center", justifyContent: "center"}}>
                         <Col>
-                           <Card style={{flex: 1, background: "rgba(0,0,0,0.5)"}}>
+                           <Card style={{flex: 1, background: "rgba(0,0,0,0.5)", marginBottom: "1rem"}}>
                               <Card.Body>
                                  If you don't have any packages created yet or you want to view your existing packages, pick me!<br/><br/>
                                  <Link 
