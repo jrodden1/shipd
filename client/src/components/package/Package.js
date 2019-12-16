@@ -24,15 +24,15 @@ export default class Package extends Component {
       } = this.props.pkg
 
       return (
-         <div>
-            <Card style={{flex: 1, width: '28rem'}} bg="light" text="black">
+         <Col>
+            <Card className="mx-auto" style={{width: '300px'}} bg="light" text="black">
                <Card.Header>
                   {getProviderLogo("shipd")} Shipd Package Id: {id}
                </Card.Header>
                <Card.Body>
                   <Row>
-                     <Col style={{width: 13}} className="text-center">{senderInfo(this.props.pkg)}</Col>
-                     <Col style={{width: 13}} className="text-center">{receiverInfo(this.props.pkg)}</Col>
+                     <Col className="text-center">{senderInfo(this.props.pkg)}</Col>
+                     <Col className="text-center">{receiverInfo(this.props.pkg)}</Col>
                   </Row>
                   <Row style={{padding: "10px"}}>
                      <Col className="text-center">{getProviderLogo(service_provider)}<br/>
@@ -49,13 +49,18 @@ export default class Package extends Component {
                   </Row>
                </Card.Body>
                <Card.Footer >
-                  <Row style={{paddingRight: "10px", paddingLeft: "10px"}} className="justify-content-between">
-                     <Button  variant="danger" onClick={this.handleDeleteBtn}> Delete Package </Button>
-                     <Button  variant="secondary" onClick={() => this.props.setModalShow(true, this.props.pkg)}>Details</Button>   
+                  <Row className="justify-content-space-around">
+                     <Col> 
+                        <Button  variant="danger" onClick={this.handleDeleteBtn}>Delete</Button>
+                     </Col>
+                     <Col></Col>
+                     <Col>
+                        <Button  variant="secondary" onClick={() => this.props.setModalShow(true, this.props.pkg)}>Details</Button>   
+                     </Col>
                   </Row>   
                </Card.Footer>
             </Card><br />
-         </div>
+         </Col>
       )
    }
 }

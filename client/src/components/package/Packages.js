@@ -1,7 +1,7 @@
 import React from 'react';
 import Package from './Package'
 import { Link } from 'react-router-dom'
-import { CardDeck, Card } from 'react-bootstrap'
+import { Card, Row, Container } from 'react-bootstrap'
 
 // Functional component that renders out a welcome card if no packages yet, or renders out all the packages
 const Packages = ({ packages, deleteModalShow, setModalShow, modalShow }) => {
@@ -27,9 +27,11 @@ const Packages = ({ packages, deleteModalShow, setModalShow, modalShow }) => {
       return (
          <div className="text-center">
             <Link to="/packages/new" className="btn btn-secondary">Create New Package</Link><br /><br />
-            <CardDeck style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+            <Container>
+            <Row className="justify-content-around">
                {formatPackages()}
-            </CardDeck>
+            </Row>
+            </Container> 
          </div>
       );
    }
