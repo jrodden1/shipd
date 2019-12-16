@@ -1,6 +1,6 @@
 import React from 'react';
 import serviceProviders from '../../helpers/serviceProviderHelpers'
-import { Card, CardDeck, Col, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
 // Functional Component that takes in the reports object and then renders out the reports based on that object
@@ -15,8 +15,8 @@ const Reports = ({ reports }) => {
          const services = serviceProviders[provider]
          const { total } = reports[provider]
          return (
-            <Col md={4} style={{padding: 0}}>
-               <Card key={provider} style={{minWidth: "50%", margin: "1rem"}} bg="light" text="black">
+            <Col>
+               <Card key={provider} className="mx-auto" style={{width: '260px', margin: "1rem"}} bg="light" text="black">
                   <Card.Body>
                      <div>
                      {getProviderLogo(provider)}<br/>
@@ -42,7 +42,7 @@ const Reports = ({ reports }) => {
    //Renders out a card deck of all the provider's stats
    const renderProviderStats = () => {
       return (
-         <Row>
+         <Row className="justify-content-around">
             {serviceProvidersStats()}  
          </Row>     
       )
@@ -60,7 +60,7 @@ const Reports = ({ reports }) => {
                </Card.Body>
             </Card>
          </div>
-         <div >
+         <div>
             {renderProviderStats()}
          </div>
       </div>
