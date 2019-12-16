@@ -25,7 +25,7 @@ const Home = () => {
                backgroundSize: "cover" }}>
             <source src={shipdIntroVideo} type="video/mp4" />
          </video>
-         <Row  style={{justifyContent: "space-between", margin: "8%"}}>
+         <Row style={{justifyContent: "space-between", margin: "8%"}}>
             <Col>
                <Card style={{background: "rgba(0,0,0,0.3)", color: "white", width: "auto", height: "auto"}}>
                   <Card.Body className="text-center">
