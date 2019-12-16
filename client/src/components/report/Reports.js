@@ -1,6 +1,6 @@
 import React from 'react';
 import serviceProviders from '../../helpers/serviceProviderHelpers'
-import { Card, CardDeck } from 'react-bootstrap'
+import { Card, CardDeck, Col, Row } from 'react-bootstrap'
 import getProviderLogo from '../../helpers/LogoHelpers'
 
 // Functional Component that takes in the reports object and then renders out the reports based on that object
@@ -15,13 +15,13 @@ const Reports = ({ reports }) => {
          const services = serviceProviders[provider]
          const { total } = reports[provider]
          return (
-            <div key={provider}>
-               <Card style={{flex: 1, width: '15rem', height: '16.5rem'}} bg="light" text="black">
+            <Col md={4} style={{padding: 0}}>
+               <Card key={provider} style={{minWidth: "50%", margin: "1rem"}} bg="light" text="black">
                   <Card.Body>
                      <div>
                      {getProviderLogo(provider)}<br/>
                      {provider} Stats<br />
-                     Total {provider} Packages: {total}
+                     Total Packages: {total}
                      <br />
                      {services.map(service => {
                         return (
@@ -33,8 +33,8 @@ const Reports = ({ reports }) => {
                      })}
                      </div>
                   </Card.Body>
-               </Card><br />
-            </div>
+               </Card>
+            </Col>
          )
       })
    }
@@ -42,16 +42,16 @@ const Reports = ({ reports }) => {
    //Renders out a card deck of all the provider's stats
    const renderProviderStats = () => {
       return (
-         <CardDeck style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+         <Row>
             {serviceProvidersStats()}  
-         </CardDeck>     
+         </Row>     
       )
    }
          
    //Actually renders out the reports page in the desired format
    return (
-      <div style={{padding: "2rem"}}>
-         <div style={{paddingBottom: "2rem", display: 'flex', justifyContent: "center"}}>
+      <div style={{margin: "2rem"}}>
+         <div style={{display: 'flex', justifyContent: "center"}}>
             <Card key="0-card" style={{width: '23rem'}} bg="light" text="black">
                <Card.Body>
                   <div className="text-center">
@@ -60,7 +60,7 @@ const Reports = ({ reports }) => {
                </Card.Body>
             </Card>
          </div>
-         <div>
+         <div >
             {renderProviderStats()}
          </div>
       </div>
