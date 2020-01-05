@@ -18,6 +18,8 @@ seeds.rb
 !/log/.keep
 !/tmp/.keep
 
+# Ignore .env file
+.env
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
