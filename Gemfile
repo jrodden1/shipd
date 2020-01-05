@@ -14,8 +14,13 @@ gem 'puma', '>= 4.3.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# enabled also for Auth0
+gem 'bcrypt', '~> 3.1.7'
 
+# to handle jwt from Auth0
+gem 'knock'
+gem 'active_model_serializers'
+gem 'dotenv-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
